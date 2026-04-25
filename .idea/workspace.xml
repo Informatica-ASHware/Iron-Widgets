@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6819b1c-16cd-45d7-bcd3-f5cdf768b262" name="Changes" comment="Added prompts and legacy code for new package">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/iron_widgets.dart" beforeDir="false" />
-    </list>
+    <list default="true" id="b6819b1c-16cd-45d7-bcd3-f5cdf768b262" name="Changes" comment="Updated flutter: '&gt;=3.27.0'" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -129,7 +126,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777023104083</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Updated flutter: '&gt;=3.27.0'">
+      <option name="closed" value="true" />
+      <created>1777146834394</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1777146834394</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -146,6 +151,7 @@
       <path value="$PROJECT_DIR$/legacy/IronWidgets/flutter_custom_select" />
     </ignored-roots>
     <MESSAGE value="Added prompts and legacy code for new package" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added prompts and legacy code for new package" />
+    <MESSAGE value="Updated flutter: '&gt;=3.27.0'" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated flutter: '&gt;=3.27.0'" />
   </component>
 </project>
