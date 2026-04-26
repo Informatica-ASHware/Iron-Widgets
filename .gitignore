@@ -29,3 +29,7 @@ Thumbs.db
 example/build/
 example/.dart_tool/
 example/.packages
+
+# Flutter plugin and cache files
+.flutter-plugins
+.flutter-plugins-dependencies

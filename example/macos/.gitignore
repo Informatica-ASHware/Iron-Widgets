@@ -5,3 +5,7 @@
 # Xcode-related
 **/dgph
 **/xcuserdata/
+
+# Flutter plugin and cache files
+.flutter-plugins
+.flutter-plugins-dependencies
