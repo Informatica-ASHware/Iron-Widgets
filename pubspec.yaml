@@ -1,14 +1,15 @@
 name: iron_widgets
-description: General-purpose widget library for the CryptBot ecosystem.
-version: 0.1.0
-publish_to: none
-homepage: https://github.com/Informatica-ASHware/Iron-Widgets
-repository: https://github.com/Informatica-ASHware/Iron-Widgets
-issue_tracker: https://github.com/Informatica-ASHware/Iron-Widgets/issues
+description: >-
+  A Flutter widget library with Iron Man aesthetics: themed micro-widgets,
+  form controls and show-panels, all driven by IronWidgetsTheme.
+version: 1.0.0
+homepage: https://github.com/yourusername/iron_widgets
+repository: https://github.com/yourusername/iron_widgets
+issue_tracker: https://github.com/yourusername/iron_widgets/issues
 
 environment:
-  sdk: ">=3.6.0 <4.0.0"
-  flutter: ">=3.27.0"
+  sdk: '>=3.11.0 <4.0.0'
+  flutter: '>=3.24.0'
 
 dependencies:
   flutter:
@@ -17,7 +18,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
-  # Si añades assets o fuentes, declarar aquí.
+  # Pure widget library – no assets required at package level.

@@ -1,39 +1,113 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# iron_widgets
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+[![pub package](https://img.shields.io/pub/v/iron_widgets.svg)](https://pub.dev/packages/iron_widgets)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+A Flutter widget library inspired by Iron Man aesthetics — micro-editors,
+compact toggles, labelled form controls and financial-style show panels, all
+driven by a single `IronWidgetsTheme` that integrates cleanly with your
+existing `MaterialApp`.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+---
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+| Widget | Description |
+|---|---|
+| `IronLabel` | Bold, themed label |
+| `IronMiniText` | Compact text — auto right-aligns numerics |
+| `IronCheck` | Controlled checkbox with label |
+| `IronMicroSwitch` | Compact toggle button (gold / white) |
+| `IronMicroEditor` | Inline numeric text field |
+| `IronEditor` | Full text editor with optional debounce |
+| `IronSelect<T>` | Single-select bottom-sheet picker |
+| `IronEnum<T>` | Enum single-select picker |
+| `IronMultiSelector<T>` | Multi-select with Material 3 FilterChips |
+| `Show` | Single label/value row |
+| `ShowValuesColumn` | Two-row value panel |
+| `ShowPercColumn` | Two-row percentage panel |
 
-## Getting started
+---
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+## Installation
 
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  iron_widgets: ^1.0.0
 ```
 
-## Additional information
+---
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+## Quick Start
+
+### Option A — Wrap a subtree
+
+```dart
+import 'package:iron_widgets/iron_widgets.dart';
+
+IronWidgetsThemeScope(
+  child: MyDashboard(),
+)
+```
+
+### Option B — Integrate with MaterialApp
+
+```dart
+MaterialApp(
+  theme: IronWidgetsTheme.defaults().buildMaterialTheme(),
+  darkTheme: IronWidgetsTheme.defaults()
+      .buildMaterialTheme(brightness: Brightness.dark),
+  home: MyHome(),
+)
+```
+
+### Option C — No setup needed
+
+Every widget falls back to `IronWidgetsTheme.defaults()` automatically, so
+you can drop in any widget without ceremony:
+
+```dart
+IronMicroSwitch(text: 'HUD', value: _hud, onChanged: (v) => setState(() => _hud = v))
+```
+
+---
+
+## Theming
+
+Override individual tokens with `copyWith`:
+
+```dart
+IronWidgetsThemeScope(
+  theme: IronWidgetsTheme.defaults().copyWith(
+    gold: Colors.amber,
+    microFontSize: 12,
+  ),
+  child: MyPanel(),
+)
+```
+
+See [doc/theming_guide.md](doc/theming_guide.md) for the complete guide.
+
+---
+
+## Accessibility
+
+- All interactive widgets wrap their content in `Semantics`.
+- Every widget exposes a `semanticLabel` parameter.
+- Micro-widget text respects the OS `TextScaler`.
+- Disabled state is honoured visually and functionally.
+
+---
+
+## Third-party code
+
+This package vendors a modernised copy of
+[flutter_custom_selector](https://github.com/hbrhbr/flutter_custom_select)
+(BSD 2-Clause) for the bottom-sheet picker used by `IronSelect`, `IronEnum`,
+and `IronMultiSelector`.  Full attribution in [NOTICE.md](NOTICE.md).
+
+---
+
+## Migration from legacy IronWidgets
+
+See [MIGRATION.md](MIGRATION.md).

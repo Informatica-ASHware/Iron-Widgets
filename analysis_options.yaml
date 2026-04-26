@@ -1,4 +1,25 @@
 include: package:flutter_lints/flutter.yaml
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+analyzer:
+  errors:
+    unused_import: error
+  language:
+    strict-casts: true
+    strict-raw-types: true
+
+linter:
+  rules:
+    - prefer_const_constructors
+    - prefer_const_literals_to_create_immutables
+    - avoid_print
+    - require_trailing_commas
+    - sort_constructors_first
+    - unnecessary_lambdas
+    - prefer_single_quotes
+    - use_super_parameters
+    - avoid_redundant_argument_values
+    - prefer_final_locals
+    - prefer_final_fields
+    - use_string_buffers
+    - unnecessary_const
+    - avoid_unnecessary_containers
