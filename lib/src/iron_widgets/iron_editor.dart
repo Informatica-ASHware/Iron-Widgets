@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../../../files-26/iron_label.dart';
+import 'iron_label.dart';
 
 /// A labelled text field with optional debouncing.
 ///

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../internal/theme_resolver.dart';
-import '../vendor/flutter_custom_selector/flutter_custom_selector.dart';
+import '../vendor/flutter_custom_selector/utils/enum.dart';
+import '../vendor/flutter_custom_selector/utils/flutter_custom_select_item.dart';
+import '../vendor/flutter_custom_selector/utils/utils.dart';
+import '../vendor/flutter_custom_selector/widget/flutter_custom_selector_sheet.dart';
 
 /// A multi-select widget that displays selected items as [FilterChip]s and
 /// opens a bottom-sheet for selection.

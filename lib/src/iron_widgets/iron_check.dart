@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../internal/theme_resolver.dart';
-import '../../../files-26/iron_label.dart';
+import '../internal/theme_resolver.dart';
+import 'iron_label.dart';
 
 /// A labelled checkbox widget.
 ///

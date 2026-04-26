@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iron_widgets/iron_widgets.dart';
 
-import '../../files-26/sections/shows_section.dart';
-import '../../files-26/sections/simple_widgets_section.dart';
-import '../../files-26/theme_switcher.dart';
+import '../sections/shows_section.dart';
+import '../sections/simple_widgets_section.dart';
+import '../theme_switcher.dart';
 
 class ShowcaseScreen extends StatelessWidget {
   const ShowcaseScreen({super.key, required this.notifier});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/iron_widgets_theme.dart';
+import '../theme/iron_widgets_theme.dart';
 
 /// Resolves the nearest [IronWidgetsTheme] from [context].
 ///

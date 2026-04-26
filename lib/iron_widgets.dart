@@ -37,7 +37,7 @@
 /// | [Show] | Single label/value row |
 /// | [ShowValuesColumn] | Two-row value panel |
 /// | [ShowPercColumn] | Two-row percentage panel |
-library iron_widgets;
+library;
 
 // Theme
 export 'src/theme/iron_colors.dart';

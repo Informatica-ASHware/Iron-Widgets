@@ -7,7 +7,7 @@ import 'flutter_custom_selector_sheet.dart';
 
 /// A single-select field that opens a bottom-sheet for item selection.
 class CustomSingleSelectField<T> extends StatefulWidget {
-  CustomSingleSelectField({
+  const CustomSingleSelectField({
     super.key,
     required this.items,
     required this.title,

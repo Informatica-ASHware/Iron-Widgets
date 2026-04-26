@@ -33,25 +33,25 @@ class _SimpleWidgetsSectionState extends State<SimpleWidgetsSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _SectionHeader('Simple Widgets'),
-        _WidgetCard(
+        const _SectionHeader('Simple Widgets'),
+        const _WidgetCard(
           title: 'IronLabel',
           snippet: "IronLabel('Power Level')\nIronLabel('Power', colon: false)",
           child: Wrap(
             spacing: 16,
-            children: const [
+            children: [
               IronLabel('Power Level'),
               IronLabel('Status', colon: false),
             ],
           ),
         ),
-        _WidgetCard(
+        const _WidgetCard(
           title: 'IronMiniText',
           snippet:
               "IronMiniText('1234.56')  // right-aligned\nIronMiniText('Revenue') // left-aligned",
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               IronMiniText('1234.56', width: 120),
               SizedBox(height: 4),
               IronMiniText('Revenue', width: 120),

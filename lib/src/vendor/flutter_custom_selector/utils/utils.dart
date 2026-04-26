@@ -36,5 +36,5 @@ TextStyle defaultTextStyle({
 /// Returns a rounded [OutlineInputBorder].
 InputBorder inputFieldBorder({Color? color}) => OutlineInputBorder(
       borderRadius: BorderRadius.circular(borderRadius),
-      borderSide: BorderSide(width: 1, color: color ?? borderColor),
+      borderSide: BorderSide(color: color ?? borderColor),
     );

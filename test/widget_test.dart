@@ -177,7 +177,6 @@ void main() {
         _wrap(
           IronEditor(
             label: 'Name',
-            initialValue: '',
             onChanged: (v) => received = v,
           ),
         ),
@@ -189,7 +188,7 @@ void main() {
     testWidgets('shows label with colon by default', (tester) async {
       await tester.pumpWidget(
         _wrap(
-          IronEditor(label: 'Field', initialValue: '', onChanged: (_) {}),
+          IronEditor(label: 'Field', onChanged: (_) {}),
         ),
       );
       expect(find.text('Field:'), findsOneWidget);

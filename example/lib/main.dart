@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iron_widgets/iron_widgets.dart';
 
 import 'showcase_screen.dart';
-import '../../files-26/theme_switcher.dart';
+import '../theme_switcher.dart';
 
 void main() => runApp(const IronWidgetsExampleApp());
 

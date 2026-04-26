@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/enum.dart';
-import '../utils/flutter_custom_select_item.dart';
-import '../utils/utils.dart';
-import '../lib/src/vendor/flutter_custom_selector/widget/flutter_custom_select_button.dart';
+import '../flutter_custom_selector.dart';
 
 /// Presents a bottom-sheet that handles both single- and multi-select flows.
 class CustomBottomSheetSelector<T> {
@@ -44,7 +41,6 @@ class CustomBottomSheetSelector<T> {
     await showModalBottomSheet<void>(
       context: buildContext,
       backgroundColor: Colors.transparent,
-      enableDrag: true,
       builder: (BuildContext bc) => Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [

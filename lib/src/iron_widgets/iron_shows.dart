@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../internal/theme_resolver.dart';
-import '../../../files-26/iron_micro_editor.dart';
+import '../internal/theme_resolver.dart';
+import 'iron_micro_editor.dart';
 
 /// A single-row label/value display cell.
 ///
@@ -46,7 +46,6 @@ class Show extends StatelessWidget {
 
     final Widget valueWidget = editable
         ? IronMicroEditor(
-            label: '',
             initialValue: value,
             onChanged: onChanged ?? (_) {},
             width: 40,
@@ -64,7 +63,6 @@ class Show extends StatelessWidget {
         padding: const EdgeInsets.all(1),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(label, style: theme.baseStyleLabel),
             valueWidget,

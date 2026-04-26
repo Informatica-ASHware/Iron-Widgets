@@ -1,4 +1,4 @@
-import '../../../../../files-26/flutter_custom_select_item.dart';
+import 'flutter_custom_select_item.dart';
 
 /// Utility actions for multi-select dropdown state management.
 class CustomMultiSelectDropdownActions<T> {

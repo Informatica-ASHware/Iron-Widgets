@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../vendor/flutter_custom_selector/flutter_custom_selector.dart';
+import '../vendor/flutter_custom_selector/widget/flutter_single_select.dart';
 
 /// A single-select dropdown backed by a bottom-sheet picker.
 ///

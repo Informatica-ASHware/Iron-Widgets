@@ -19,15 +19,15 @@ class _ShowsSectionState extends State<ShowsSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _SectionHeader('Show Panels'),
-        _ShowCard(
+        const _SectionHeader('Show Panels'),
+        const _ShowCard(
           title: 'Show (read-only)',
-          snippet:
-              "Show(label: 'Open', value: '142.30')",
+          snippet: "Show(label: 'Open', value: '142.30')",
           child: Wrap(
             spacing: 4,
             runSpacing: 4,
-            children: const [
+            children: [
+              // Text('See source code'),
               Show(label: 'O', value: '142.30'),
               Show(label: 'H', value: '148.00'),
               Show(label: 'L', value: '139.50'),
@@ -48,10 +48,7 @@ class _ShowsSectionState extends State<ShowsSection> {
                 onChanged: (v) => setState(() => _editableValue = v),
               ),
               const SizedBox(width: 12),
-              Text(
-                '→ $_editableValue',
-                style: const TextStyle(fontSize: 11),
-              ),
+              Text('→ $_editableValue', style: const TextStyle(fontSize: 11)),
             ],
           ),
         ),
@@ -63,6 +60,7 @@ class _ShowsSectionState extends State<ShowsSection> {
             spacing: 4,
             runSpacing: 4,
             children: [
+              // Text('See source code'),
               const ShowValuesColumn(
                 topLabel: 'O',
                 topValue: '142.30',
@@ -129,18 +127,19 @@ class _ShowsSectionState extends State<ShowsSection> {
 
 class _SectionHeader extends StatelessWidget {
   const _SectionHeader(this.title);
+
   final String title;
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.fromLTRB(0, 24, 0, 8),
-        child: Text(
-          title,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-      );
+    padding: const EdgeInsets.fromLTRB(0, 24, 0, 8),
+    child: Text(
+      title,
+      style: Theme.of(
+        context,
+      ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+    ),
+  );
 }
 
 class _ShowCard extends StatelessWidget {
@@ -156,59 +155,58 @@ class _ShowCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Card(
-        margin: const EdgeInsets.only(bottom: 16),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              const Divider(height: 20),
-              child,
-              const SizedBox(height: 16),
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                padding: const EdgeInsets.all(12),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        snippet,
-                        style: const TextStyle(
-                          fontFamily: 'monospace',
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.copy, size: 18),
-                      tooltip: 'Copy snippet',
-                      onPressed: () {
-                        Clipboard.setData(ClipboardData(text: snippet));
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Copied to clipboard'),
-                            duration: Duration(seconds: 1),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
+    margin: const EdgeInsets.only(bottom: 16),
+    child: Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
-        ),
-      );
+          const Divider(height: 20),
+          child,
+          const SizedBox(height: 16),
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    snippet,
+                    style: const TextStyle(
+                      fontFamily: 'monospace',
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.copy, size: 18),
+                  tooltip: 'Copy snippet',
+                  onPressed: () {
+                    Clipboard.setData(ClipboardData(text: snippet));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Copied to clipboard'),
+                        duration: Duration(seconds: 1),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }

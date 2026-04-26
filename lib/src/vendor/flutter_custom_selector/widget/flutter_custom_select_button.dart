@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/utils.dart';
+import '../utils/utils.dart';
 
 /// A single tappable row inside the custom bottom-sheet selector.
 class CustomBottomSheetButton extends StatelessWidget {
@@ -35,7 +35,6 @@ class CustomBottomSheetButton extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               leading ?? const SizedBox.shrink(),
               SizedBox(width: leading != null ? 10 : 0),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../lib/src/theme/iron_widgets_theme.dart';
+import '../theme/iron_widgets_theme.dart';
 
 /// Injects an [IronWidgetsTheme] into the widget tree without replacing the
 /// consumer's [ThemeData].

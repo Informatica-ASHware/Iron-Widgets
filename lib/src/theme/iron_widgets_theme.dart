@@ -39,6 +39,28 @@ import 'iron_text_styles.dart';
 /// [resolveIronTheme], so no explicit setup is required.
 @immutable
 class IronWidgetsTheme extends ThemeExtension<IronWidgetsTheme> {
+
+  // ── Factory ───────────────────────────────────────────────────────────────
+
+  /// Returns the canonical Iron Man default theme.
+  factory IronWidgetsTheme.defaults() => const IronWidgetsTheme(
+        darkRed: IronColors.darkRed,
+        gold: IronColors.gold,
+        darkGray: IronColors.darkGray,
+        baseStyleValue: IronTextStyles.baseStyleValue,
+        baseStyleLabel: IronTextStyles.baseStyleLabel,
+        baseStyleTitle: IronTextStyles.baseStyleTitle,
+        baseStylePercent: IronTextStyles.baseStylePercent,
+        microWidgetHeight: IronDimens.microWidgetHeight,
+        microFontSize: IronDimens.microFontSize,
+        microIntWidth: IronDimens.microIntWidth,
+        microValueWidth: IronDimens.microValueWidth,
+        microPercentWidth: IronDimens.microPercentWidth,
+        valueBackground: IronColors.gold,
+        borderAccent: IronColors.gold,
+        dangerColor: IronColors.darkRed,
+        neutralSurface: IronColors.darkGray,
+      );
   /// Creates an [IronWidgetsTheme] with explicit values for every token.
   const IronWidgetsTheme({
     required this.darkRed,
@@ -114,28 +136,6 @@ class IronWidgetsTheme extends ThemeExtension<IronWidgetsTheme> {
 
   /// Neutral surface colour.  Defaults to [darkGray].
   final Color neutralSurface;
-
-  // ── Factory ───────────────────────────────────────────────────────────────
-
-  /// Returns the canonical Iron Man default theme.
-  factory IronWidgetsTheme.defaults() => const IronWidgetsTheme(
-        darkRed: IronColors.darkRed,
-        gold: IronColors.gold,
-        darkGray: IronColors.darkGray,
-        baseStyleValue: IronTextStyles.baseStyleValue,
-        baseStyleLabel: IronTextStyles.baseStyleLabel,
-        baseStyleTitle: IronTextStyles.baseStyleTitle,
-        baseStylePercent: IronTextStyles.baseStylePercent,
-        microWidgetHeight: IronDimens.microWidgetHeight,
-        microFontSize: IronDimens.microFontSize,
-        microIntWidth: IronDimens.microIntWidth,
-        microValueWidth: IronDimens.microValueWidth,
-        microPercentWidth: IronDimens.microPercentWidth,
-        valueBackground: IronColors.gold,
-        borderAccent: IronColors.gold,
-        dangerColor: IronColors.darkRed,
-        neutralSurface: IronColors.darkGray,
-      );
 
   // ── Material theme builder ────────────────────────────────────────────────
 

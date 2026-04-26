@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../internal/theme_resolver.dart';
+import '../internal/theme_resolver.dart';
 
 /// A compact text widget that right-aligns numeric content and left-aligns
 /// everything else.

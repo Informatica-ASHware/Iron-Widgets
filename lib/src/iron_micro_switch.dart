@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../internal/theme_resolver.dart';
+import 'internal/theme_resolver.dart';
 
 /// A compact toggle button styled with the Iron Man palette.
 ///
