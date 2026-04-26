@@ -4,39 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6819b1c-16cd-45d7-bcd3-f5cdf768b262" name="Changes" comment="Updated from Sonnet">
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/sections/shows_section.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/sections/shows_section.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/sections/simple_widgets_section.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/sections/simple_widgets_section.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/showcase_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/showcase_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/test/widget_test.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/iron_widgets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/iron_widgets.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/internal/theme_resolver.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/internal/theme_resolver.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/iron_micro_switch.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/iron_micro_switch.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/iron_widgets/iron_check.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/iron_widgets/iron_check.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/iron_widgets/iron_editor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/iron_widgets/iron_editor.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/iron_widgets/iron_enum.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/iron_widgets/iron_enum.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/iron_widgets/iron_micro_switch.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/iron_widgets/iron_micro_switch.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/iron_widgets/iron_mini_text.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/iron_widgets/iron_mini_text.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/iron_widgets/iron_multi_selector.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/iron_widgets/iron_multi_selector.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/iron_widgets/iron_select.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/iron_widgets/iron_select.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/iron_widgets/iron_shows.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/iron_widgets/iron_shows.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/theme/iron_widgets_theme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/theme/iron_widgets_theme.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/theme/iron_widgets_theme_scope.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/theme/iron_widgets_theme_scope.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/flutter_custom_selector.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/flutter_custom_selector.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/utils/flutter_custom_select_actions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/utils/flutter_custom_select_actions.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/utils/utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/utils/utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/widget/flutter_custom_select_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/widget/flutter_custom_select_button.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/widget/flutter_custom_selector_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/widget/flutter_custom_selector_sheet.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/widget/flutter_multi_select.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/widget/flutter_multi_select.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/widget/flutter_single_select.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/vendor/flutter_custom_selector/widget/flutter_single_select.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/iron_widgets_test.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/widget_test.dart" afterDir="false" />
+    <list default="true" id="b6819b1c-16cd-45d7-bcd3-f5cdf768b262" name="Changes" comment="Fixed by me">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="repository" />
+    </option>
   </component>
   <component name="FileEditorManager">
     <leaf>
@@ -91,6 +71,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
+    "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/abnershernandez/Dev/ashware/Iron Widgets/iron_widgets_package_files",
@@ -194,7 +175,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777185432404</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fixed by me">
+      <option name="closed" value="true" />
+      <created>1777186152763</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1777186152763</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -215,6 +204,7 @@
     <MESSAGE value="Updated flutter: '&gt;=3.24.5'" />
     <MESSAGE value="tag v0.1.0" />
     <MESSAGE value="Updated from Sonnet" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated from Sonnet" />
+    <MESSAGE value="Fixed by me" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed by me" />
   </component>
 </project>
