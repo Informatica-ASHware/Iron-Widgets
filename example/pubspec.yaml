@@ -1,3 +1,4 @@
+# PROTECTED: No cambiar versiones ni flujos de CI sin justificacion en PR_JUSTIFICATION.md
 name: iron_widgets_example
 description: Showcase app for the iron_widgets package.
 publish_to: 'none'

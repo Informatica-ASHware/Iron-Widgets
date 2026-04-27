@@ -1,3 +1,4 @@
+# PROTECTED: No cambiar versiones ni flujos de CI sin justificacion en PR_JUSTIFICATION.md
 name: iron_widgets
 description: >-
   A Flutter widget library with Iron Man aesthetics: themed micro-widgets,
