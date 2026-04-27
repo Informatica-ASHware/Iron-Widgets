@@ -1,10 +1,16 @@
-# Pub Publication Ignore
+# Pub Publication Ignore (excluye archivos del paquete subido a pub.dev)
+
+# IDEs y S.O.
 .DS_Store
+.idea/
+*.iml
+.vscode/
+.metadata
+
+# Herramientas de desarrollo y configuración del monorepo
 .cursorrules
 .fvm/
 .fvmrc
-.idea/
-.metadata
 .github/
 AGENTS.md
 CLAUDE.md
@@ -12,11 +18,28 @@ CONTRIBUTING.md
 PR_JUSTIFICATION.md
 PR_JUSTIFICATION.md.example
 tree.md
-docs/
-readme_*.md
 scripts/
-iron_widgets.iml
+readme_*.md
 
-.dart_tool/package_config.json
-.dart_tool/package_graph.json
-.dart_tool/version
+# Documentación interna
+docs/
+doc/api_reference.md
+
+# Cache y herramientas
+.dart_tool/
+
+# Archivos específicos que aparecen en el dry-run y no deberían estar
+# (como archivos de migración o notas internas si aplica)
+# MIGRATION.md  # Lo dejamos si es útil para el usuario
+# NOTICE.md     # Lo dejamos por temas legales
+
+# Limpieza del ejemplo (opcional pero recomendado para reducir ruido)
+# Si quieres que el ejemplo sea ejecutable tal cual, comenta estas líneas.
+# Pero para pub.dev, a veces menos es más.
+example/android/
+example/ios/
+example/linux/
+example/macos/
+example/web/
+example/windows/
+example/build/
