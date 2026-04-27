@@ -1,13 +1,13 @@
 # Changelog
 
-All notable changes to `iron_widgets` are documented here.
+## [1.0.1] – 2026-04-27
 
-The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and
-this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+### Added
+- Repository made public to allow pub.dev link verification.
 
 ---
 
-## [1.0.0] – 2025-01-01
+## [1.0.0] – 2026-04-27
 
 ### Added
 
