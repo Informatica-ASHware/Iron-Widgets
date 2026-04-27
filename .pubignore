@@ -1,0 +1,22 @@
+# Pub Publication Ignore
+.DS_Store
+.cursorrules
+.fvm/
+.fvmrc
+.idea/
+.metadata
+.github/
+AGENTS.md
+CLAUDE.md
+CONTRIBUTING.md
+PR_JUSTIFICATION.md
+PR_JUSTIFICATION.md.example
+tree.md
+docs/
+readme_*.md
+scripts/
+iron_widgets.iml
+
+.dart_tool/package_config.json
+.dart_tool/package_graph.json
+.dart_tool/version
