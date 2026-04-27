@@ -10,7 +10,7 @@ issue_tracker: https://github.com/yourusername/iron_widgets/issues
 
 environment:
   sdk: ">=3.11.5 <4.0.0"
-  flutter: ">=3.41.0"
+  flutter: ">=3.41.7"
 
 dependencies:
   flutter:
