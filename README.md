@@ -1,7 +1,7 @@
 # iron_widgets
 
 [![pub package](https://img.shields.io/pub/v/iron_widgets.svg)](https://pub.dev/packages/iron_widgets)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: BSD 3-Clause](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 A Flutter widget library inspired by Iron Man aesthetics — micro-editors,
 compact toggles, labelled form controls and financial-style show panels, all

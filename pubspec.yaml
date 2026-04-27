@@ -4,9 +4,9 @@ description: >-
   A Flutter widget library with Iron Man aesthetics: themed micro-widgets,
   form controls and show-panels, all driven by IronWidgetsTheme.
 version: 1.0.0
-homepage: https://github.com/yourusername/iron_widgets
-repository: https://github.com/yourusername/iron_widgets
-issue_tracker: https://github.com/yourusername/iron_widgets/issues
+homepage: https://github.com/Informatica-ASHware/Iron-Widgets
+repository: https://github.com/Informatica-ASHware/Iron-Widgets
+issue_tracker: https://github.com/Informatica-ASHware/Iron-Widgets/issues
 
 environment:
   sdk: ">=3.11.5 <4.0.0"

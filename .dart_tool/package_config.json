@@ -161,7 +161,7 @@
       "name": "iron_widgets",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "3.6"
+      "languageVersion": "3.11"
     }
   ],
   "generator": "pub",
