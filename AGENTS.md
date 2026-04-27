@@ -1,44 +1,55 @@
-# AGENTS.md - Repository Rules for AI Agents
+# AGENTS.md - Reglas del Repositorio para Agentes IA
 
-## 🎯 Purpose
-This file provides critical context and constraints for AI agents (Antigravity, Cursor, Claude, etc.) working on this monorepo. Following these rules is mandatory to maintain stability across Dart and Flutter projects.
+## 🎯 Propósito y Contexto del Ecosistema
+Este archivo proporciona el contexto crítico y las instrucciones obligatorias para los agentes IA (Antigravity, Cursor, Claude, etc.) que trabajen en este monorepo. Seguir estas reglas es mandatorio para mantener la estabilidad a través de los proyectos de Dart y Flutter.
+
 > [!IMPORTANT]
-> **Contexto del Ecosistema:** Este repositorio es un componente crítico del ecosistema **ASHware Antigravity** (junto con *Iron Widgets, binance_dart_sdk, KChart2 y CryptBot*). Las reglas de integridad existen porque compartimos dependencias núcleo y patrones de CI; cualquier desalineación aquí puede propagar inestabilidad a todo el sistema.
+> **Contexto del Ecosistema:** Este repositorio es un componente crítico del ecosistema **CryptBot System** (junto con *Iron Widgets, binance_dart_sdk, KChart2 y CryptBot*). Las reglas de integridad existen porque compartimos dependencias núcleo y patrones de CI; cualquier desalineación aquí puede propagar inestabilidad a todo el sistema.
 
+---
 
-## 🛠 Dependency Management Rules
+## 🤖 INSTRUCCIONES GLOBALES Y DEFINICIÓN DE TERMINADO (Definition of Done)
 
-### 1. The "SDK Pinning" Rule (CRITICAL)
-- **Problem:** Flutter SDK often pins specific versions of core packages (like `meta`, `path`, `analyzer`).
-- **Constraint:** NEVER force a dependency version that exceeds what the current Flutter SDK supports in its `flutter_test` or core components.
-- **Example:** If `flutter_test` depends on `meta 1.15.0`, do NOT set `meta: ^1.16.0` even if it is available. This will cause a version solving failure.
-- **Action:** Always check the current Flutter SDK constraints before upgrading core transitive dependencies.
+Para **CADA** Historia de Usuario (US) generada mediante un Pull Request (PR), el Agente IA debe cumplir estrictamente este `Definition of Done` (DoD). Si falta un punto, el PR será rechazado.
+
+1.  **Código Limpio:** Cero advertencias del linter.
+2.  **Testing Obligatorio:** Unit tests para lógica; Golden tests para UI.
+3.  **Documentación:** Todo método y clase pública debe tener `/// Dartdoc`.
+4.  **Inmutabilidad:** Uso de `@freezed` o `final` con `copyWith`.
+5.  **Performance:** Uso estricto de `double`, colecciones numéricas optimizadas.
+6.  **Platform Target:** Desktop (MacOS) y Mobile nativo. Soporte Web relegado.
+7.  **ChangeLog:** Actualizar `CHANGELOG.md` bajo `## [Unreleased]`.
+
+---
+
+## 🛠 REGLAS DE GESTIÓN DE DEPENDENCIAS
+
+### 1. The "SDK Pinning" Rule (CRÍTICO)
+- **Restricción:** NUNCA fuerces una versión de dependencia que exceda lo que el Flutter SDK actual soporta.
+- **Acción:** Verifica los constraints del Flutter SDK antes de actualizar dependencias core.
 
 ### 2. The "Stale Package" Rule
-- **Constraint:** Avoid adding or maintaining dependencies that have not been updated for more than **1 year**.
-- **Reasoning:** Dart and Flutter evolve rapidly. Stale packages lead to `breaking changes` and incompatibility with newer SDKs.
-- **Action:** If a package is stale, look for a modern alternative or notify the user to consider forking or replacing it.
+- **Restricción:** Evita dependencias sin actualizaciones por más de **1 año**.
+- **Acción:** Busca alternativas modernas si un paquete es stale.
 
 ### 3. Version Hard-Locking
-- Use `^` for flexible but safe updates (semver).
-- DO NOT use `any` unless explicitly allowed in the `directivas/` for internal monorepo packages.
+- Usa `^` para actualizaciones seguras. Prohibido el uso de `any`.
+
+### 4. Realidad Temporal (CRÍTICO)
+- **Restricción:** NUNCA asumas la fecha basada en datos de entrenamiento. DEBES usar comandos del sistema o metadata para obtener la fecha REAL (Hoy es Abril de 2026).
+- **Acción:** Antes de actualizar cualquier CHANGELOG.md o documentación, verifica el año y día real mediante el comando `date`.
 
 ---
 
-## 🚀 Workflow & Tooling
+## 🚀 MODO DE OPERACIÓN Y FLUJO DE TRABAJO DEL AGENTE
 
-### 1. Integrity Guardian
-- You MUST run `python3 scripts/check_integrity.py` before suggesting a commit that touches `pubspec.yaml` or `.github/workflows/`.
-- If changes are needed, you MUST create a `PR_JUSTIFICATION.md` with a detailed technical explanation.
-
-### 2. Dart/Flutter Synchronization
-- After any dependency change, run `python3 scripts/sincronizar_dependencias_dart.py` to ensure the entire monorepo is still in sync and passes analysis.
+1. **Sincronización:** Branching siguiendo `feature/US-X.XX`.
+2. **Integridad (Guardian):** Ejecutar `scripts/check_integrity.py` antes de commits en pubspec/CI.
+3. **Ciclo de Código:** Tests -> Implementación -> `dart format` -> `dart analyze`.
+4. **Sincronización Monorepo:** Ejecutar `scripts/sincronizar_dependencias_dart.py`.
+5. **ChangeLog:** Documentar en `## [Unreleased]`.
 
 ---
 
-## 🧠 Memory & Directives
-- This repository uses a **3-component system**:
-  1. `directivas/`: Standard Operating Procedures (SOPs).
-  2. `scripts/`: Deterministic execution scripts.
-  3. `AGENTS.md`: This context file.
-- ALWAYS consult the `directivas/` folder before implementing new logic.
+## 🧠 SISTEMA DE MEMORIA Y DIRECTIVAS
+Este repositorio utiliza un **sistema de 3 componentes**: `directivas/`, `scripts/` y `AGENTS.md`. SIEMPRE consulta la carpeta `directivas/` antes de implementar nueva lógica.
