@@ -60,7 +60,7 @@ melos:
 
     pkg:publish:
       description: "Publish packages to pub.dev."
-      run: melos publish --yes --no-dry-run
+      run: melos publish --yes --no-dry-run --no-published
 
     pkg:release:
       description: "Full release cycle: version bump + publish."
