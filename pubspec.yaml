@@ -3,7 +3,7 @@ name: iron_widgets
 description: >-
   A Flutter widget library with Iron Man aesthetics: themed micro-widgets,
   form controls and show-panels, all driven by IronWidgetsTheme.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/Informatica-ASHware/Iron-Widgets
 repository: https://github.com/Informatica-ASHware/Iron-Widgets
 issue_tracker: https://github.com/Informatica-ASHware/Iron-Widgets/issues
@@ -24,10 +24,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  melos: ^7.0.0
+  melos: ^7.0.30
 
 melos:
-  name: iron_widgets
+  name: iron_widgets_workspace
+  useRootAsPackage: true
+
+  packages:
+    - "example"
 
   command:
     bootstrap:
@@ -62,6 +66,14 @@ melos:
       description: "Full release cycle: version bump + publish."
       run: melos run pkg:version && melos run pkg:publish
 
+    pkg:release:patch:
+      description: "Force a patch version bump and publish."
+      run: melos version iron_widgets patch --yes && melos run pkg:publish
+
     pkg:release:dev:
       description: "Pre-release cycle: version bump (dev) + publish."
       run: melos version --prerelease=dev --yes && melos run pkg:publish
+
+    pkg:release:patch:dev:
+      description: "Force a patch dev version bump and publish."
+      run: melos version iron_widgets patch --preid=dev --yes && melos run pkg:publish
