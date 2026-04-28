@@ -4,7 +4,7 @@
 Este archivo proporciona el contexto crítico y las instrucciones obligatorias para los agentes IA (Antigravity, Cursor, Claude, etc.) que trabajen en este monorepo. Seguir estas reglas es mandatorio para mantener la estabilidad a través de los proyectos de Dart y Flutter.
 
 > [!IMPORTANT]
-> **Contexto del Ecosistema:** Este repositorio es un componente crítico del ecosistema **CryptBot System** (junto con *Iron Widgets, binance_dart_sdk, KChart2 y CryptBot*). Las reglas de integridad existen porque compartimos dependencias núcleo y patrones de CI; cualquier desalineación aquí puede propagar inestabilidad a todo el sistema.
+> **Contexto del Ecosistema:** Este repositorio es un componente crítico del ecosistema **CryptBot System** (junto con *Iron Widgets, binance_dart_sdk, AshCandleChart y CryptBot*). Las reglas de integridad existen porque compartimos dependencias núcleo y patrones de CI; cualquier desalineación aquí puede propagar inestabilidad a todo el sistema.
 
 ---
 

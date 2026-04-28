@@ -3,6 +3,7 @@ name: iron_widgets_example
 description: Showcase app for the iron_widgets package.
 publish_to: 'none'
 version: 1.0.0+1
+resolution: workspace
 
 environment:
   sdk: ">=3.11.5 <4.0.0"

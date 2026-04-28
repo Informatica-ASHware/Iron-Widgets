@@ -12,6 +12,10 @@ environment:
   sdk: ">=3.11.5 <4.0.0"
   flutter: ">=3.41.7"
 
+# === Pub Workspaces (Dart 3.6+) ===
+workspace:
+  - example
+
 dependencies:
   flutter:
     sdk: flutter
@@ -20,3 +24,28 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  melos: ^7.0.0
+
+melos:
+  name: iron_widgets
+
+  command:
+    bootstrap:
+      environment:
+        sdk: ">=3.11.5 <4.0.0"
+        flutter: ">=3.41.7"
+
+  scripts:
+    analyze:
+      description: "Analyze all packages in the workspace."
+      run: melos exec -- "dart analyze ."
+
+    test:
+      description: "Run all tests."
+      run: melos exec -- "flutter test"
+      packageFilters:
+        dirExists: test
+
+    format:
+      description: "Format all Dart files."
+      run: melos exec -- "dart format ."

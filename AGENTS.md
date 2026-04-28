@@ -4,7 +4,7 @@
 Este archivo proporciona el contexto crítico y las instrucciones obligatorias para los agentes IA (Antigravity, Cursor, Claude, etc.) que trabajen en este monorepo. Seguir estas reglas es mandatorio para mantener la estabilidad a través de los proyectos de Dart y Flutter.
 
 > [!IMPORTANT]
-> **Contexto del Ecosistema:** Este repositorio es un componente crítico del ecosistema **CryptBot System** (junto con *Iron Widgets, binance_dart_sdk, KChart2 y CryptBot*). Las reglas de integridad existen porque compartimos dependencias núcleo y patrones de CI; cualquier desalineación aquí puede propagar inestabilidad a todo el sistema.
+> **Contexto del Ecosistema:** Este repositorio es un componente crítico del ecosistema **CryptBot System** (junto con *Iron Widgets, binance_dart_sdk, AshCandleChart y CryptBot*). Las reglas de integridad existen porque compartimos dependencias núcleo y patrones de CI; cualquier desalineación aquí puede propagar inestabilidad a todo el sistema.
 
 ---
 
@@ -38,6 +38,13 @@ Para **CADA** Historia de Usuario (US) generada mediante un Pull Request (PR), e
 ### 4. Realidad Temporal (CRÍTICO)
 - **Restricción:** NUNCA asumas la fecha basada en datos de entrenamiento. DEBES usar comandos del sistema o metadata para obtener la fecha REAL (Hoy es Abril de 2026).
 - **Acción:** Antes de actualizar cualquier CHANGELOG.md o documentación, verifica el año y día real mediante el comando `date`.
+
+
+### 4. Análisis Estático (lints_core)
+- TODOS los proyectos deben usar `package:lints/core.yaml` como base de análisis.
+- DEBES ejecutar `flutter analyze` o `dart analyze` antes de proponer cualquier cambio de código.
+- Si el análisis falla, DEBES corregir los problemas siguiendo la `directivas/correccion_lints_SOP.md`.
+- NUNCA omitas lints con `// ignore` a menos que exista una razón arquitectónica documentada.
 
 ---
 
