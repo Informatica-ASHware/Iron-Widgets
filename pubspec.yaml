@@ -49,3 +49,19 @@ melos:
     format:
       description: "Format all Dart files."
       run: melos exec -- "dart format ."
+
+    version:
+      description: "Bump versions and generate changelogs."
+      run: melos version --yes
+
+    publish:
+      description: "Publish packages to pub.dev."
+      run: melos publish --yes --no-dry-run
+
+    release:
+      description: "Full release cycle: version bump + publish."
+      run: melos run version && melos run publish
+
+    release:dev:
+      description: "Pre-release cycle: version bump (dev) + publish."
+      run: melos version --prerelease=dev --yes && melos run publish
