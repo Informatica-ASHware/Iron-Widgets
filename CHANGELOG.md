@@ -50,6 +50,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   gradient `fill` and uniform downsampling above 200 points. Completes
   Phase 2 (market indicators); the example app gains a "Market
   Indicators" section.
+- **US-2.09** – `IronSegmented<T>`: compact segmented control for closed
+  sets (LONG/SHORT, PNL filters, timeframes) with per-segment
+  `selectedColor` (e.g. bull/bear sides), automatic text contrast via
+  `textColorOn` and Left/Right keyboard navigation.
+- **US-2.10** – `IronPercentSlider`: gold slider with preset chips
+  (default `10/25/50/75/97`) and a coupled `IronMicroEditor`; all input
+  sources emit clamped, precision-rounded values and the editor follows
+  external changes without disturbing the caret.
+- **US-2.11** – `IronStepper`: `IronMicroEditor` with `−`/`+` buttons,
+  hold-to-repeat via `Ticker` (400 ms delay, 100 ms pulses, local
+  accumulator so pulses never depend on parent rebuilds), min/max
+  clamping and precision rounding.
+- **US-2.12** – `IronActionButton`: large CTA with
+  `IronActionVariant.{primary,success,danger}` mapped to
+  `gold`/`bullColor`/`bearColor`, optional `sublabel` and `loading`
+  spinner state. Completes Phase 3 (order entry); the example app gains
+  an interactive "Order Entry" form section.
 
 ## 2026-04-28
 

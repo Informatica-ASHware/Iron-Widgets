@@ -370,6 +370,92 @@ overall trend (`bullColor` / `bearColor`, white-54 when flat);
 Series longer than 200 points are uniformly downsampled. Complements
 `AshCandleChart`; it does not replace it.
 
+## Order entry (US-2.09 … US-2.12)
+
+### `IronSegmented<T>`
+
+```dart
+IronSegmented<T>({
+  required List<T> segments,
+  required T value,
+  required ValueChanged<T> onChanged,
+  String Function(T)? itemAsString,
+  Color Function(T segment)? selectedColor,  // default: gold
+  double height = 26,
+  double? segmentWidth,
+  bool enabled = true,
+  String? semanticLabel,
+})
+```
+
+Segmented control for closed sets (LONG/SHORT, PNL filters, L/F/M/S/T).
+Selected segment fills with `gold` (or `selectedColor`, e.g. LONG →
+`bullColor` / SHORT → `bearColor`) with automatic contrast via
+`textColorOn`. Left/Right arrows move the selection while focused
+(clamped at the ends).
+
+### `IronPercentSlider`
+
+```dart
+IronPercentSlider({
+  required double value,
+  required ValueChanged<double> onChanged,
+  double min = 0,
+  double max = 100,
+  List<double> presets = const [10, 25, 50, 75, 97],
+  bool editable = true,
+  int precision = 0,
+  bool enabled = true,
+  String? semanticLabel,
+})
+```
+
+Gold slider + preset chips + coupled `IronMicroEditor`. Every source
+(drag, chip, typing) emits through `onChanged`, clamped to `[min, max]`
+and rounded to `precision`; the editor follows external changes without
+fighting the caret while typing. Empty `presets` hides the chip row.
+
+### `IronStepper`
+
+```dart
+IronStepper({
+  required double value,
+  required ValueChanged<double> onChanged,
+  double step = 1,
+  double min = double.negativeInfinity,
+  double max = double.infinity,
+  int precision = 0,
+  double editorWidth = 50,
+  bool enabled = true,
+  String? semanticLabel,
+})
+```
+
+`IronMicroEditor` flanked by `−` / `+` buttons. Press steps once
+immediately; holding repeats after 400 ms at 100 ms intervals (driven by
+a `Ticker`, no `Timer`s). Results are clamped and precision-rounded
+(`0.1 + 0.2 → 0.3`, no floating-point noise).
+
+### `IronActionButton`
+
+```dart
+IronActionButton({
+  required String label,
+  required VoidCallback? onPressed,  // null → disabled
+  IronActionVariant variant = IronActionVariant.primary,
+  String? sublabel,
+  bool loading = false,
+  double? width,          // double.infinity to fill
+  double height = 40,
+  String? semanticLabel,
+})
+```
+
+Large CTA in the Finandy style ("Add SHORT"). `variant` maps to `gold` /
+`bullColor` / `bearColor` with automatic contrast; `sublabel` renders a
+secondary line (e.g. the estimated size) and `loading` swaps the content
+for a spinner while suppressing taps.
+
 ### `Show`
 
 ```dart
