@@ -3,7 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [Unreleased]
+## 1.1.0 - 2026-07-11
+
+> **Upgrade note:** the overflow fixes change how the legacy widgets
+> render — `Show` cells now grow beyond the old fixed 60 px (with
+> ellipsis when bounded), the `IronEditor` field flexes beside its
+> label within the declared `width`, and long `IronCheck` labels scale
+> down. No API signature changed; review layouts that relied on the
+> old fixed sizes.
 
 ### Fixed
 
