@@ -7,6 +7,11 @@ import 'iron_micro_editor.dart';
 ///
 /// Migrated from the legacy top-level `show()` function.
 ///
+/// Overflow-safe: the cell has a *minimum* width of
+/// `IronWidgetsTheme.microValueWidth` and grows with content; in
+/// width-bounded cells (e.g. [ShowGrid]) label and value pin to the
+/// edges and degrade with ellipsis instead of overflowing.
+///
 /// Width, height, and text styles resolve from the active [IronWidgetsTheme].
 /// When [editable] is `true`, the value area becomes an [IronMicroEditor].
 ///
@@ -51,22 +56,44 @@ class Show extends StatelessWidget {
             width: 40,
             height: 14,
           )
-        : Text(value, style: theme.baseStyleValue);
+        : Flexible(
+            child: Text(
+              value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: theme.baseStyleValue,
+            ),
+          );
 
     return Semantics(
       label: semanticLabel ?? '$label $value',
       child: Container(
-        width: theme.microValueWidth,
+        constraints: BoxConstraints(minWidth: theme.microValueWidth),
         height: theme.microWidgetHeight,
         color: Colors.white,
         margin: const EdgeInsets.all(2),
         padding: const EdgeInsets.all(1),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(label, style: theme.baseStyleLabel),
-            valueWidget,
-          ],
+        child: LayoutBuilder(
+          builder: (context, constraints) => Row(
+            // Bounded cells (e.g. inside ShowGrid) fill the width and pin
+            // the value to the right; unbounded contexts pack to content.
+            mainAxisSize: constraints.hasBoundedWidth
+                ? MainAxisSize.max
+                : MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.baseStyleLabel,
+                ),
+              ),
+              const SizedBox(width: 4),
+              valueWidget,
+            ],
+          ),
         ),
       ),
     );

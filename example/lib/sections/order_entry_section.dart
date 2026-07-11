@@ -54,7 +54,10 @@ class _OrderEntrySectionState extends State<OrderEntrySection> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Row(
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 8,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
                     IronSegmented<String>(
                       segments: const ['LONG', 'SHORT'],
@@ -64,7 +67,6 @@ class _OrderEntrySectionState extends State<OrderEntrySection> {
                           s == 'LONG' ? theme.bullColor : theme.bearColor,
                       onChanged: (s) => setState(() => _side = s),
                     ),
-                    const Spacer(),
                     const IronLabel('Lev'),
                     IronStepper(
                       value: _leverage,

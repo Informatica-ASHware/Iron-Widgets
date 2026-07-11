@@ -44,12 +44,13 @@ class _MarketIndicatorsSectionState extends State<MarketIndicatorsSection> {
           snippet:
               'IronPriceTicker(price: _price, precision: 1)\n'
               'IronDeltaBadge(deltaPct)',
-          child: Row(
+          child: Wrap(
+            spacing: 12,
+            runSpacing: 8,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               IronPriceTicker(price: _price, precision: 1, suffix: ' USDT'),
-              const SizedBox(width: 12),
               IronDeltaBadge(deltaPct),
-              const SizedBox(width: 16),
               IconButton(
                 icon: const Icon(Icons.arrow_upward, size: 16),
                 tooltip: 'Simulate rise',
@@ -89,12 +90,12 @@ class _MarketIndicatorsSectionState extends State<MarketIndicatorsSection> {
               'IronSparkline(values)\n'
               'IronSparkline(values, positiveIsBull: false)\n'
               'IronSparkline(flat, fill: false)',
-          child: Row(
+          child: Wrap(
+            spacing: 16,
+            runSpacing: 12,
             children: [
               IronSparkline(_rising),
-              SizedBox(width: 16),
               IronSparkline(_falling),
-              SizedBox(width: 16),
               IronSparkline([42, 42, 42, 42], fill: false),
             ],
           ),

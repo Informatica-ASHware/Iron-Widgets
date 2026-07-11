@@ -53,10 +53,13 @@ class _PositionStatusSectionState extends State<PositionStatusSection> {
                   ],
                 ),
                 const SizedBox(height: 12),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Wrap(
+                  spacing: 16,
+                  runSpacing: 12,
+                  crossAxisAlignment: WrapCrossAlignment.start,
                   children: [
-                    Expanded(
+                    SizedBox(
+                      width: 240,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -79,7 +82,6 @@ class _PositionStatusSectionState extends State<PositionStatusSection> {
                         ],
                       ),
                     ),
-                    const SizedBox(width: 16),
                     IronGauge(
                       value: margin,
                       label: 'Margin',

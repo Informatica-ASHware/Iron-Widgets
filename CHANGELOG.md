@@ -5,6 +5,25 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [Unreleased]
 
+### Fixed
+
+- Overflow-proof layouts for the legacy widgets (root cause of the
+  RenderFlex stripes visible in the example app and of 7 failing
+  tests): `Show` (fixed 60 px cell → min-width cell with ellipsis and
+  edge-pinned label/value when bounded, also fixing `ShowValuesColumn`,
+  `ShowPercColumn` and `ShowGrid`), `IronEditor` (double width
+  accounting in beside-label mode → label flexes and the field expands
+  within the declared `width`; multi-line fields now size to intrinsic
+  height instead of the undercounting `lines × 18` formula) and
+  `IronCheck` (long labels scale down within `width`).
+- Example app hardened for narrow viewports (rows → `Wrap` in the
+  market, order-entry and position sections; realistic `Show` labels)
+  and guarded by a new overflow test that scrolls the full showcase at
+  360 / 800 / 1280 px asserting zero layout exceptions.
+- Golden baselines for the legacy widget suite checked in
+  (`test/goldens/`, generated on the CI toolchain, Flutter 3.41.7 /
+  Linux) reflecting the corrected layouts.
+
 ### Added
 
 - **US-2.01** – Semantic theme tokens in `IronWidgetsTheme` (all optional

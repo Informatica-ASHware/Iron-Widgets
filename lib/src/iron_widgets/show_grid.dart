@@ -30,9 +30,8 @@ class ShowItem {
 /// equal width; an incomplete last row is padded so columns stay
 /// aligned.
 ///
-/// Each cell embeds a [Show], whose internal value box has a fixed width
-/// (micro tokens); give the grid roughly ≥ 180 px per column with the
-/// default theme so cells do not overflow.
+/// Each cell embeds a [Show]; narrow columns degrade gracefully with
+/// ellipsis instead of overflowing.
 ///
 /// ## Behaviour with / without [IronWidgetsTheme]
 /// Purely compositional: each cell is a [Show], which resolves its own

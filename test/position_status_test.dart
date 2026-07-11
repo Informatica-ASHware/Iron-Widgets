@@ -174,7 +174,7 @@ void main() {
     ) async {
       await tester.pumpWidget(
         _wrap(
-          const SizedBox(width: 600, child: ShowGrid(items: items, columns: 3)),
+          const SizedBox(width: 420, child: ShowGrid(items: items, columns: 3)),
         ),
       );
       // 5 items in 3 columns → rows of 3 + 2(+padding): the incomplete

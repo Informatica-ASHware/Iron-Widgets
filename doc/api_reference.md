@@ -526,8 +526,7 @@ ShowGrid({
 
 Stats header (Volume / High / Low / Funding) laying `Show` cells out in
 equal-width columns; an incomplete last row is padded to keep columns
-aligned. `Show` has fixed internal widths — allow roughly ≥ 180 px per
-column with the default theme.
+aligned. Narrow columns degrade gracefully with ellipsis.
 
 ## Containers (US-2.17, US-2.18)
 
