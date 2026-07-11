@@ -23,6 +23,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - Golden baselines for the legacy widget suite checked in
   (`test/goldens/`, generated on the CI toolchain, Flutter 3.41.7 /
   Linux) reflecting the corrected layouts.
+- Theme test `lerp() returns end at t=1` compared a plain `Color`
+  against a `MaterialColor` (whose `==` requires the same runtimeType);
+  it now asserts by colour value with `isSameColorAs`. The full suite is
+  green (164/164).
 
 ### Added
 

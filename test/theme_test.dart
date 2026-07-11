@@ -62,7 +62,9 @@ void main() {
       final a = IronWidgetsTheme.defaults();
       final b = a.copyWith(darkRed: Colors.blue);
       final result = a.lerp(b, 1);
-      expect(result.darkRed, Colors.blue);
+      // Color.lerp returns a plain Color; Colors.blue is a MaterialColor
+      // whose == requires the same runtimeType, so compare by colour value.
+      expect(result.darkRed, isSameColorAs(Colors.blue));
     });
 
     test('interpolates colour at t=0.5', () {
