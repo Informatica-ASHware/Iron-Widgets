@@ -1,6 +1,6 @@
 # SPEC — Plan de release `iron_widgets` 1.1.0
 
-> **Fecha:** 2026-07-11 · **Rama de trabajo:** `new-widgets-july26` · **Estado:** propuesta para aprobación
+> **Fecha:** 2026-07-11 · **Rama de trabajo:** `new-widgets-july26` · **Estado:** EJECUTADO — 1.1.0 publicado en pub.dev (latest) y Release `v1.1.0` creado en GitHub el 2026-07-11
 > **Alcance:** consolidar las fases 1–5 del `SPEC_WIDGETS_ROADMAP` (US-2.01…US-2.18) y los fixes
 > de overflow/tests en un único release minor.
 
