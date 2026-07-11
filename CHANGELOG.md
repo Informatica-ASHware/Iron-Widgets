@@ -81,6 +81,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   cells in equal-width columns with padded incomplete rows. Completes
   Phase 4 (position & status); the example app gains an interactive
   "Position & Status" card section.
+- **US-2.17** – `IronPanel`: elevated card with gold header, optional
+  `trailing` widget and animated `collapsible` body
+  (`initiallyExpanded`, `onExpansionChanged`).
+- **US-2.18** – `IronTabs`: compact index-based tabs with a gold
+  underline indicator and Left/Right keyboard navigation; complementary
+  to `IronSegmented` (tabs navigate, segments select). Completes
+  Phase 5 (containers) and closes `SPEC_WIDGETS_ROADMAP` — all 18 user
+  stories (US-2.01 … US-2.18) implemented; the example app gains a
+  "Containers" section with a tabbed panel demo.
 
 ## 2026-04-28
 

@@ -1,5 +1,9 @@
 # SPEC — Roadmap de ampliación `iron_widgets` (inspiración Finandy)
 
+> **Estado (2026-07-11):** Fases 1–5 implementadas (US-2.01 … US-2.18) con tests,
+> goldens, docs y secciones de ejemplo. Pendiente: release 1.1.0+ (bump de `pubspec`,
+> `PR_JUSTIFICATION.md` y `scripts/check_integrity.py`).
+
 > **Fecha:** 2026-07-11 · **Base:** v1.0.2 publicada en pub.dev · **Estado:** propuesta para aprobación
 > **Regla marco:** ningún cambio rompe la API pública 1.x. Todo entra como *feature* aditiva (SemVer minor).
 

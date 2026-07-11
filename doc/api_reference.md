@@ -529,6 +529,45 @@ equal-width columns; an incomplete last row is padded to keep columns
 aligned. `Show` has fixed internal widths — allow roughly ≥ 180 px per
 column with the default theme.
 
+## Containers (US-2.17, US-2.18)
+
+### `IronPanel`
+
+```dart
+IronPanel({
+  required String title,
+  required Widget child,
+  Widget? trailing,
+  bool collapsible = false,
+  bool initiallyExpanded = true,
+  ValueChanged<bool>? onExpansionChanged,
+  EdgeInsetsGeometry padding = const EdgeInsets.all(12),
+  String? semanticLabel,
+})
+```
+
+Elevated card on `surfaceElevated` with a gold header, optional
+`trailing` widget and, when `collapsible`, an animated body toggle with
+a rotating chevron. The "Settings" / "Assets" building block.
+
+### `IronTabs`
+
+```dart
+IronTabs({
+  required List<String> tabs,
+  required int index,
+  required ValueChanged<int> onChanged,
+  double height = 30,
+  double? tabWidth,
+  bool enabled = true,
+  String? semanticLabel,
+})
+```
+
+Compact index-based tabs with a 2 px gold underline over a hairline
+baseline; Left/Right arrows move the index while focused (clamped).
+Complementary to `IronSegmented`: tabs *navigate*, segments *select*.
+
 ### `Show`
 
 ```dart

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iron_widgets/iron_widgets.dart';
 
+import '../sections/containers_section.dart';
 import '../sections/dropdown_selectors_section.dart';
 import '../sections/market_indicators_section.dart';
 import '../sections/order_entry_section.dart';
@@ -55,6 +56,8 @@ class ShowcaseScreen extends StatelessWidget {
                           OrderEntrySection(),
                           SizedBox(height: 16),
                           PositionStatusSection(),
+                          SizedBox(height: 16),
+                          ContainersSection(),
                           SizedBox(height: 16),
                           ShowsSection(),
                           SizedBox(height: 32),
