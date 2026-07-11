@@ -27,6 +27,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   against a `MaterialColor` (whose `==` requires the same runtimeType);
   it now asserts by colour value with `isSameColorAs`. The full suite is
   green (164/164).
+- Cross-platform golden comparison: new `test/flutter_test_config.dart`
+  installs a comparator that tolerates rasterization diffs up to 5 %
+  (macOS/Windows anti-alias text and blurs slightly differently from the
+  Linux CI toolchain that generates the baselines, producing 0.03–4.2 %
+  pixel noise without any real change). On the generating platform the
+  diff is 0 %, so CI keeps enforcing exact rendering de facto;
+  `--update-goldens` is unaffected. Verified in both directions (2 %
+  perturbation accepted with a log note, 10 % rejected).
 
 ### Added
 
