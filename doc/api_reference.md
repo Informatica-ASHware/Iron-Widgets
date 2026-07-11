@@ -237,8 +237,19 @@ IronEnum<T>({
   String Function(T)? itemAsString,
   String cancelButtonText = 'Cancel',
   String? semanticLabel,
+  IronSelectMode mode = IronSelectMode.bottomSheet,
+  double? menuWidth,
+  double? menuMaxHeight,
+  bool searchable = false,
+  bool enabled = true,
 })
 ```
+
+Supports the same presentation modes as `IronSelect<T>` (see
+[Presentation modes](#presentation-modes-us-202) above). Since [value] is
+non-nullable, the trigger always shows the current selection and the menu
+opens with the keyboard highlight on it. `cancelButtonText` only applies
+to the bottom sheet.
 
 ### `IronMultiSelector<T>`
 

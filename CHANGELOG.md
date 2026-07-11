@@ -21,6 +21,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   `mode`, `menuWidth`, `menuMaxHeight`, `searchable`, `enabled` (the
   latter also applies to the bottom-sheet mode). Default mode remains
   `bottomSheet` — no behavioural change for existing code.
+- **US-2.03** – `IronEnum` gains the same presentation modes and
+  parameters as `IronSelect` (`mode`, `menuWidth`, `menuMaxHeight`,
+  `searchable`, `enabled`). In dropdown mode the keyboard highlight opens
+  on the current value (non-nullable in `IronEnum`), marked with a gold
+  check. Default remains `bottomSheet`.
 
 ## 2026-04-28
 
