@@ -20,6 +20,9 @@ via the internal `resolveIronTheme(context)` helper, which falls back to
 | `borderAccent` | `gold` | Border colour of micro widgets |
 | `dangerColor` | `darkRed` | Checkbox active colour, chip colour |
 | `neutralSurface` | `darkGray` | Neutral container colour |
+| `bullColor` | `0xFF26A69A` | Bullish / upward market direction (US-2.01) |
+| `bearColor` | `0xFFEF5350` | Bearish / downward direction — *direction, not severity*; distinct from `dangerColor` (US-2.01) |
+| `surfaceElevated` | `0xFF474747` | Floating layers: dropdown menus, panels (US-2.01) |
 
 ---
 
@@ -64,6 +67,8 @@ IronWidgetsThemeScope(
 | `microIntWidth` | `20` | `widthInt = 20` |
 | `microValueWidth` | `60` | `widthValue = 60` |
 | `microPercentWidth` | `60` | `widthPercent = 60` |
+| `cornerRadius` | `8` | — (US-2.01: rounded surfaces — menus, panels, tags) |
+| `overlayMaxHeight` | `320` | — (US-2.01: max height of anchored overlay menus) |
 
 ---
 

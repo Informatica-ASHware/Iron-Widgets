@@ -56,4 +56,5 @@ export 'src/iron_widgets/iron_micro_switch.dart';
 export 'src/iron_widgets/iron_mini_text.dart';
 export 'src/iron_widgets/iron_multi_selector.dart';
 export 'src/iron_widgets/iron_select.dart';
+export 'src/iron_widgets/iron_select_mode.dart';
 export 'src/iron_widgets/iron_shows.dart';

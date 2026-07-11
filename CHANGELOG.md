@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [Unreleased]
+
+### Added
+
+- **US-2.01** – Semantic theme tokens in `IronWidgetsTheme` (all optional
+  with defaults; fully backward compatible): `bullColor`, `bearColor`
+  (market *direction*, distinct from `dangerColor` severity),
+  `surfaceElevated`, `cornerRadius`, `overlayMaxHeight`. New matching
+  constants in `IronColors` / `IronDimens`.
+- **US-2.02** – `IronSelectMode` (`bottomSheet` | `dropdown` | `adaptive`)
+  and desktop-first anchored dropdown for `IronSelect`. The overlay flips
+  vertically when space runs out, closes on outside tap / `Esc` / focus
+  loss / ancestor scroll, and supports full keyboard navigation (arrows
+  with wrap, `Enter`/`Space`, `Home`/`End`, prefix typeahead) plus an
+  optional inline `searchable` filter. New `IronSelect` parameters:
+  `mode`, `menuWidth`, `menuMaxHeight`, `searchable`, `enabled` (the
+  latter also applies to the bottom-sheet mode). Default mode remains
+  `bottomSheet` — no behavioural change for existing code.
+
 ## 2026-04-28
 
 ### Changes

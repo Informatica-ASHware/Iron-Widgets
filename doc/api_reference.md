@@ -192,8 +192,36 @@ IronSelect<T>({
   String doneButtonText = 'Done',
   String cancelButtonText = 'Cancel',
   String? semanticLabel,
+  IronSelectMode mode = IronSelectMode.bottomSheet,
+  double? menuWidth,
+  double? menuMaxHeight,
+  bool searchable = false,
+  bool enabled = true,
 })
 ```
+
+#### Presentation modes (US-2.02)
+
+`mode` chooses how options are presented:
+
+| Mode | Behaviour |
+|---|---|
+| `IronSelectMode.bottomSheet` | Legacy modal bottom sheet (default in 1.x). |
+| `IronSelectMode.dropdown` | Overlay menu anchored to the trigger, Finandy-style. Flips above the trigger when vertical space runs out. |
+| `IronSelectMode.adaptive` | `dropdown` on desktop (macOS / Windows / Linux) and web; `bottomSheet` on Android / iOS / Fuchsia. |
+
+Dropdown-mode extras:
+
+- **Keyboard**: `↑`/`↓` (with wrap-around), `Enter`/`Space` select,
+  `Esc` closes, `Home`/`End`, prefix typeahead while the menu is open.
+- **`searchable: true`** replaces typeahead with an inline filter field
+  that receives focus on open.
+- **`menuWidth` / `menuMaxHeight`** override the trigger width and the
+  `overlayMaxHeight` theme token respectively.
+- The menu closes on outside tap, `Esc`, focus loss, item selection or
+  ancestor scroll.
+- `enabled: false` dims the trigger and blocks interaction (both modes).
+- `doneButtonText` / `cancelButtonText` only apply to the bottom sheet.
 
 ### `IronEnum<T>`
 

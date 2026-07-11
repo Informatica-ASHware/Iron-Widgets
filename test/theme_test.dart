@@ -166,11 +166,71 @@ void main() {
     });
   });
 
+  group('Semantic tokens (US-2.01)', () {
+    test('defaults expose the new tokens', () {
+      final theme = IronWidgetsTheme.defaults();
+      expect(theme.bullColor, IronColors.bull);
+      expect(theme.bearColor, IronColors.bear);
+      expect(theme.surfaceElevated, IronColors.surfaceElevated);
+      expect(theme.cornerRadius, IronDimens.cornerRadius);
+      expect(theme.overlayMaxHeight, IronDimens.overlayMaxHeight);
+    });
+
+    test('bearColor is distinct from dangerColor by default', () {
+      final theme = IronWidgetsTheme.defaults();
+      expect(theme.bearColor, isNot(theme.dangerColor));
+    });
+
+    test('copyWith overrides each new token independently', () {
+      final theme = IronWidgetsTheme.defaults().copyWith(
+        bullColor: const Color(0xFF00FF00),
+        bearColor: const Color(0xFFFF0000),
+        surfaceElevated: const Color(0xFF101010),
+        cornerRadius: 2,
+        overlayMaxHeight: 100,
+      );
+      expect(theme.bullColor, const Color(0xFF00FF00));
+      expect(theme.bearColor, const Color(0xFFFF0000));
+      expect(theme.surfaceElevated, const Color(0xFF101010));
+      expect(theme.cornerRadius, 2);
+      expect(theme.overlayMaxHeight, 100);
+      // Untouched tokens keep their defaults.
+      expect(theme.gold, IronColors.gold);
+    });
+
+    test('equality and hashCode account for the new tokens', () {
+      final base = IronWidgetsTheme.defaults();
+      final changed = base.copyWith(cornerRadius: 3);
+      expect(base, isNot(changed));
+      expect(base.hashCode, isNot(changed.hashCode));
+      expect(base, IronWidgetsTheme.defaults());
+    });
+
+    test('lerp interpolates the new tokens', () {
+      final a = IronWidgetsTheme.defaults().copyWith(
+        cornerRadius: 0,
+        overlayMaxHeight: 100,
+      );
+      final b = IronWidgetsTheme.defaults().copyWith(
+        cornerRadius: 10,
+        overlayMaxHeight: 300,
+      );
+      final mid = a.lerp(b, 0.5);
+      expect(mid.cornerRadius, 5);
+      expect(mid.overlayMaxHeight, 200);
+      final midBull = Color.lerp(a.bullColor, b.bullColor, 0.5);
+      expect(mid.bullColor, midBull);
+    });
+  });
+
   group('IronColors', () {
     test('constants have expected values', () {
       expect(IronColors.darkRed, const Color(0xFFB30000));
       expect(IronColors.gold, const Color(0xFFFFD700));
       expect(IronColors.darkGray, const Color(0xFF333333));
+      expect(IronColors.bull, const Color(0xFF26A69A));
+      expect(IronColors.bear, const Color(0xFFEF5350));
+      expect(IronColors.surfaceElevated, const Color(0xFF474747));
     });
   });
 
@@ -181,6 +241,8 @@ void main() {
       expect(IronDimens.microIntWidth, 20);
       expect(IronDimens.microValueWidth, 60);
       expect(IronDimens.microPercentWidth, 60);
+      expect(IronDimens.cornerRadius, 8);
+      expect(IronDimens.overlayMaxHeight, 320);
     });
   });
 }
