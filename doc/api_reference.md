@@ -192,8 +192,36 @@ IronSelect<T>({
   String doneButtonText = 'Done',
   String cancelButtonText = 'Cancel',
   String? semanticLabel,
+  IronSelectMode mode = IronSelectMode.bottomSheet,
+  double? menuWidth,
+  double? menuMaxHeight,
+  bool searchable = false,
+  bool enabled = true,
 })
 ```
+
+#### Presentation modes (US-2.02)
+
+`mode` chooses how options are presented:
+
+| Mode | Behaviour |
+|---|---|
+| `IronSelectMode.bottomSheet` | Legacy modal bottom sheet (default in 1.x). |
+| `IronSelectMode.dropdown` | Overlay menu anchored to the trigger, Finandy-style. Flips above the trigger when vertical space runs out. |
+| `IronSelectMode.adaptive` | `dropdown` on desktop (macOS / Windows / Linux) and web; `bottomSheet` on Android / iOS / Fuchsia. |
+
+Dropdown-mode extras:
+
+- **Keyboard**: `↑`/`↓` (with wrap-around), `Enter`/`Space` select,
+  `Esc` closes, `Home`/`End`, prefix typeahead while the menu is open.
+- **`searchable: true`** replaces typeahead with an inline filter field
+  that receives focus on open.
+- **`menuWidth` / `menuMaxHeight`** override the trigger width and the
+  `overlayMaxHeight` theme token respectively.
+- The menu closes on outside tap, `Esc`, focus loss, item selection or
+  ancestor scroll.
+- `enabled: false` dims the trigger and blocks interaction (both modes).
+- `doneButtonText` / `cancelButtonText` only apply to the bottom sheet.
 
 ### `IronEnum<T>`
 
@@ -209,8 +237,19 @@ IronEnum<T>({
   String Function(T)? itemAsString,
   String cancelButtonText = 'Cancel',
   String? semanticLabel,
+  IronSelectMode mode = IronSelectMode.bottomSheet,
+  double? menuWidth,
+  double? menuMaxHeight,
+  bool searchable = false,
+  bool enabled = true,
 })
 ```
+
+Supports the same presentation modes as `IronSelect<T>` (see
+[Presentation modes](#presentation-modes-us-202) above). Since [value] is
+non-nullable, the trigger always shows the current selection and the menu
+opens with the keyboard highlight on it. `cancelButtonText` only applies
+to the bottom sheet.
 
 ### `IronMultiSelector<T>`
 
@@ -228,8 +267,305 @@ IronMultiSelector<T>({
   String doneButtonText = 'Done',
   String cancelButtonText = 'Cancel',
   String? semanticLabel,
+  IronSelectMode mode = IronSelectMode.bottomSheet,
+  double? menuWidth,
+  double? menuMaxHeight,
+  bool searchable = false,
+  bool enabled = true,
+  String Function(List<T> selected)? summaryBuilder,
 })
 ```
+
+Supports the same presentation modes as `IronSelect<T>` (see
+[Presentation modes](#presentation-modes-us-202) above). Dropdown-mode
+specifics (US-2.04):
+
+- Rows render an Iron-style checkbox and **apply immediately**: every
+  toggle fires `onChanged` with the full new selection; there is no Done
+  step, so `doneButtonText` / `cancelButtonText` only apply to the
+  bottom sheet.
+- The panel stays open while toggling; it closes on outside tap, `Esc`,
+  focus loss or ancestor scroll. `Enter`/`Space` toggle the highlighted
+  row.
+- The `allOptionText` row toggles the whole set and hides while a search
+  query is active.
+- The trigger shows a compact summary instead of chips: the single item's
+  label, or `'n selected'`, customisable via `summaryBuilder`.
+
+## Market indicators (US-2.05 … US-2.08)
+
+### `IronDeltaBadge`
+
+```dart
+IronDeltaBadge(
+  double value, {
+  int precision = 2,
+  bool showSign = true,
+  String suffix = '%',
+  String? semanticLabel,
+})
+```
+
+Pill coloured by sign: positive → `bullColor`, negative → `bearColor`,
+zero → neutral (white-70 on `neutralSurface`). Corners use the
+`cornerRadius` token; text uses `baseStylePercent`.
+
+### `IronPriceTicker`
+
+```dart
+IronPriceTicker({
+  required double price,
+  double? previous,
+  int precision = 2,
+  Duration flashDuration = const Duration(milliseconds: 600),
+  String prefix = '',
+  String suffix = '',
+  String? semanticLabel,
+})
+```
+
+Flashes towards `bullColor` / `bearColor` when `price` changes across
+rebuilds (or vs `previous` on the very first frame) and fades back to the
+`baseStyleValue` colour over `flashDuration`. Uses tabular figures, an
+`AnimationController` created once (no timers in build) and a
+`RepaintBoundary`.
+
+### `IronCountdown`
+
+```dart
+IronCountdown({
+  DateTime? until,            // exactly one of until / remaining
+  Duration? remaining,
+  VoidCallback? onFinished,   // fires exactly once at zero
+  String Function(Duration)? format,  // default mm:ss / hh:mm:ss
+  bool paused = false,
+  double warningFraction = 0.1,
+  String? semanticLabel,
+})
+```
+
+Driven by a `Ticker` (`TickerProviderStateMixin`), no `Timer`s. `paused`
+freezes and resumes from the frozen value; the text switches to
+`dangerColor` when the remaining fraction drops below `warningFraction`.
+Rebuilds only when the displayed second changes.
+
+### `IronSparkline`
+
+```dart
+IronSparkline(
+  List<double> values, {
+  double width = 120,
+  double height = 32,
+  double strokeWidth = 1.5,
+  bool positiveIsBull = true,
+  Color? color,
+  bool fill = true,
+  String? semanticLabel,
+})
+```
+
+Zero-dependency `CustomPainter` trend line. Colour derives from the
+overall trend (`bullColor` / `bearColor`, white-54 when flat);
+`positiveIsBull: false` inverts the mapping and `color` forces one.
+Series longer than 200 points are uniformly downsampled. Complements
+`AshCandleChart`; it does not replace it.
+
+## Order entry (US-2.09 … US-2.12)
+
+### `IronSegmented<T>`
+
+```dart
+IronSegmented<T>({
+  required List<T> segments,
+  required T value,
+  required ValueChanged<T> onChanged,
+  String Function(T)? itemAsString,
+  Color Function(T segment)? selectedColor,  // default: gold
+  double height = 26,
+  double? segmentWidth,
+  bool enabled = true,
+  String? semanticLabel,
+})
+```
+
+Segmented control for closed sets (LONG/SHORT, PNL filters, L/F/M/S/T).
+Selected segment fills with `gold` (or `selectedColor`, e.g. LONG →
+`bullColor` / SHORT → `bearColor`) with automatic contrast via
+`textColorOn`. Left/Right arrows move the selection while focused
+(clamped at the ends).
+
+### `IronPercentSlider`
+
+```dart
+IronPercentSlider({
+  required double value,
+  required ValueChanged<double> onChanged,
+  double min = 0,
+  double max = 100,
+  List<double> presets = const [10, 25, 50, 75, 97],
+  bool editable = true,
+  int precision = 0,
+  bool enabled = true,
+  String? semanticLabel,
+})
+```
+
+Gold slider + preset chips + coupled `IronMicroEditor`. Every source
+(drag, chip, typing) emits through `onChanged`, clamped to `[min, max]`
+and rounded to `precision`; the editor follows external changes without
+fighting the caret while typing. Empty `presets` hides the chip row.
+
+### `IronStepper`
+
+```dart
+IronStepper({
+  required double value,
+  required ValueChanged<double> onChanged,
+  double step = 1,
+  double min = double.negativeInfinity,
+  double max = double.infinity,
+  int precision = 0,
+  double editorWidth = 50,
+  bool enabled = true,
+  String? semanticLabel,
+})
+```
+
+`IronMicroEditor` flanked by `−` / `+` buttons. Press steps once
+immediately; holding repeats after 400 ms at 100 ms intervals (driven by
+a `Ticker`, no `Timer`s). Results are clamped and precision-rounded
+(`0.1 + 0.2 → 0.3`, no floating-point noise).
+
+### `IronActionButton`
+
+```dart
+IronActionButton({
+  required String label,
+  required VoidCallback? onPressed,  // null → disabled
+  IronActionVariant variant = IronActionVariant.primary,
+  String? sublabel,
+  bool loading = false,
+  double? width,          // double.infinity to fill
+  double height = 40,
+  String? semanticLabel,
+})
+```
+
+Large CTA in the Finandy style ("Add SHORT"). `variant` maps to `gold` /
+`bullColor` / `bearColor` with automatic contrast; `sublabel` renders a
+secondary line (e.g. the estimated size) and `loading` swaps the content
+for a spinner while suppressing taps.
+
+## Position & status (US-2.13 … US-2.16)
+
+### `IronTag`
+
+```dart
+IronTag(
+  String text, {
+  IronTagVariant variant = IronTagVariant.neutral,  // gold | bull | bear | neutral
+  String? semanticLabel,
+})
+```
+
+Mini metadata chip (`SHORT`, `Isol ×20`, `PERP`). Coloured variants use a
+tinted fill with matching hairline border; `neutral` sits on
+`surfaceElevated`. Smaller corner radius than `IronDeltaBadge` so the two
+read as different species.
+
+### `IronRangeBar`
+
+```dart
+IronRangeBar({
+  required double min,        // stop-loss
+  required double max,        // take-profit
+  required double current,    // gold dot (clamped)
+  double? entry,              // gold line + P/L reference
+  bool showLabels = false,    // min (bear) / entry (gold) / max (bull)
+  int precision = 2,
+  double width = 160,
+  double height = 6,
+  String? semanticLabel,
+})
+```
+
+`CustomPainter` range bar: the segment between `entry` (or `min`) and
+`current` fills `bullColor` in profit or `bearColor` in loss.
+
+### `IronGauge`
+
+```dart
+IronGauge({
+  required double value,      // 0..1, clamped
+  String? label,
+  List<double>? thresholds,   // ticks; arc turns dangerColor past the last
+  double size = 72,
+  double strokeWidth = 6,
+  bool showValue = true,
+  String? semanticLabel,
+})
+```
+
+Arc-reactor-style 270° gauge: `gold` arc with a soft glow and a
+concentric inner ring, switching to `dangerColor` once `value` crosses
+the last threshold; each threshold renders as a tick on the track.
+
+### `ShowGrid`
+
+```dart
+ShowItem(String label, String value)   // immutable, value equality
+
+ShowGrid({
+  required List<ShowItem> items,
+  int columns = 2,
+  double columnSpacing = 12,
+  double rowSpacing = 2,
+  String? semanticLabel,
+})
+```
+
+Stats header (Volume / High / Low / Funding) laying `Show` cells out in
+equal-width columns; an incomplete last row is padded to keep columns
+aligned. Narrow columns degrade gracefully with ellipsis.
+
+## Containers (US-2.17, US-2.18)
+
+### `IronPanel`
+
+```dart
+IronPanel({
+  required String title,
+  required Widget child,
+  Widget? trailing,
+  bool collapsible = false,
+  bool initiallyExpanded = true,
+  ValueChanged<bool>? onExpansionChanged,
+  EdgeInsetsGeometry padding = const EdgeInsets.all(12),
+  String? semanticLabel,
+})
+```
+
+Elevated card on `surfaceElevated` with a gold header, optional
+`trailing` widget and, when `collapsible`, an animated body toggle with
+a rotating chevron. The "Settings" / "Assets" building block.
+
+### `IronTabs`
+
+```dart
+IronTabs({
+  required List<String> tabs,
+  required int index,
+  required ValueChanged<int> onChanged,
+  double height = 30,
+  double? tabWidth,
+  bool enabled = true,
+  String? semanticLabel,
+})
+```
+
+Compact index-based tabs with a 2 px gold underline over a hairline
+baseline; Left/Right arrows move the index while focused (clamped).
+Complementary to `IronSegmented`: tabs *navigate*, segments *select*.
 
 ### `Show`
 

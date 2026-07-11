@@ -6,17 +6,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:iron_widgets/iron_widgets.dart';
 
 Widget _goldWrap(Widget child) => MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: IronWidgetsThemeScope(
-        child: Scaffold(
-          backgroundColor: Colors.white,
-          body: Padding(
-            padding: const EdgeInsets.all(16),
-            child: child,
-          ),
-        ),
-      ),
-    );
+  debugShowCheckedModeBanner: false,
+  home: IronWidgetsThemeScope(
+    child: Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(padding: const EdgeInsets.all(16), child: child),
+    ),
+  ),
+);
 
 void main() {
   group('Golden – IronLabel', () {
@@ -64,9 +61,7 @@ void main() {
   group('Golden – IronCheck', () {
     testWidgets('unchecked', (tester) async {
       await tester.pumpWidget(
-        _goldWrap(
-          IronCheck(label: 'Agree', value: false, onChanged: (_) {}),
-        ),
+        _goldWrap(IronCheck(label: 'Agree', value: false, onChanged: (_) {})),
       );
       await expectLater(
         find.byType(IronCheck),
@@ -76,9 +71,7 @@ void main() {
 
     testWidgets('checked', (tester) async {
       await tester.pumpWidget(
-        _goldWrap(
-          IronCheck(label: 'Agree', value: true, onChanged: (_) {}),
-        ),
+        _goldWrap(IronCheck(label: 'Agree', value: true, onChanged: (_) {})),
       );
       await expectLater(
         find.byType(IronCheck),
@@ -102,9 +95,7 @@ void main() {
 
     testWidgets('active', (tester) async {
       await tester.pumpWidget(
-        _goldWrap(
-          IronMicroSwitch(text: 'HUD', value: true, onChanged: (_) {}),
-        ),
+        _goldWrap(IronMicroSwitch(text: 'HUD', value: true, onChanged: (_) {})),
       );
       await expectLater(
         find.byType(IronMicroSwitch),

@@ -39,28 +39,28 @@ import 'iron_text_styles.dart';
 /// [resolveIronTheme], so no explicit setup is required.
 @immutable
 class IronWidgetsTheme extends ThemeExtension<IronWidgetsTheme> {
-
   // ── Factory ───────────────────────────────────────────────────────────────
 
   /// Returns the canonical Iron Man default theme.
   factory IronWidgetsTheme.defaults() => const IronWidgetsTheme(
-        darkRed: IronColors.darkRed,
-        gold: IronColors.gold,
-        darkGray: IronColors.darkGray,
-        baseStyleValue: IronTextStyles.baseStyleValue,
-        baseStyleLabel: IronTextStyles.baseStyleLabel,
-        baseStyleTitle: IronTextStyles.baseStyleTitle,
-        baseStylePercent: IronTextStyles.baseStylePercent,
-        microWidgetHeight: IronDimens.microWidgetHeight,
-        microFontSize: IronDimens.microFontSize,
-        microIntWidth: IronDimens.microIntWidth,
-        microValueWidth: IronDimens.microValueWidth,
-        microPercentWidth: IronDimens.microPercentWidth,
-        valueBackground: IronColors.gold,
-        borderAccent: IronColors.gold,
-        dangerColor: IronColors.darkRed,
-        neutralSurface: IronColors.darkGray,
-      );
+    darkRed: IronColors.darkRed,
+    gold: IronColors.gold,
+    darkGray: IronColors.darkGray,
+    baseStyleValue: IronTextStyles.baseStyleValue,
+    baseStyleLabel: IronTextStyles.baseStyleLabel,
+    baseStyleTitle: IronTextStyles.baseStyleTitle,
+    baseStylePercent: IronTextStyles.baseStylePercent,
+    microWidgetHeight: IronDimens.microWidgetHeight,
+    microFontSize: IronDimens.microFontSize,
+    microIntWidth: IronDimens.microIntWidth,
+    microValueWidth: IronDimens.microValueWidth,
+    microPercentWidth: IronDimens.microPercentWidth,
+    valueBackground: IronColors.gold,
+    borderAccent: IronColors.gold,
+    dangerColor: IronColors.darkRed,
+    neutralSurface: IronColors.darkGray,
+  );
+
   /// Creates an [IronWidgetsTheme] with explicit values for every token.
   const IronWidgetsTheme({
     required this.darkRed,
@@ -79,6 +79,11 @@ class IronWidgetsTheme extends ThemeExtension<IronWidgetsTheme> {
     required this.borderAccent,
     required this.dangerColor,
     required this.neutralSurface,
+    this.bullColor = IronColors.bull,
+    this.bearColor = IronColors.bear,
+    this.surfaceElevated = IronColors.surfaceElevated,
+    this.cornerRadius = IronDimens.cornerRadius,
+    this.overlayMaxHeight = IronDimens.overlayMaxHeight,
   });
 
   // ── Palette ──────────────────────────────────────────────────────────────
@@ -136,6 +141,28 @@ class IronWidgetsTheme extends ThemeExtension<IronWidgetsTheme> {
 
   /// Neutral surface colour.  Defaults to [darkGray].
   final Color neutralSurface;
+
+  /// Colour for bullish / upward market direction.
+  /// Defaults to [IronColors.bull].  Added in US-2.01.
+  final Color bullColor;
+
+  /// Colour for bearish / downward market direction.
+  ///
+  /// Distinct from [dangerColor]: direction, not severity.
+  /// Defaults to [IronColors.bear].  Added in US-2.01.
+  final Color bearColor;
+
+  /// Surface colour for floating layers (dropdown menus, panels).
+  /// Defaults to [IronColors.surfaceElevated].  Added in US-2.01.
+  final Color surfaceElevated;
+
+  /// Corner radius for rounded surfaces (menus, panels, buttons, tags).
+  /// Defaults to [IronDimens.cornerRadius].  Added in US-2.01.
+  final double cornerRadius;
+
+  /// Maximum height of anchored overlay menus before internal scrolling.
+  /// Defaults to [IronDimens.overlayMaxHeight].  Added in US-2.01.
+  final double overlayMaxHeight;
 
   // ── Material theme builder ────────────────────────────────────────────────
 
@@ -204,25 +231,34 @@ class IronWidgetsTheme extends ThemeExtension<IronWidgetsTheme> {
     Color? borderAccent,
     Color? dangerColor,
     Color? neutralSurface,
-  }) =>
-      IronWidgetsTheme(
-        darkRed: darkRed ?? this.darkRed,
-        gold: gold ?? this.gold,
-        darkGray: darkGray ?? this.darkGray,
-        baseStyleValue: baseStyleValue ?? this.baseStyleValue,
-        baseStyleLabel: baseStyleLabel ?? this.baseStyleLabel,
-        baseStyleTitle: baseStyleTitle ?? this.baseStyleTitle,
-        baseStylePercent: baseStylePercent ?? this.baseStylePercent,
-        microWidgetHeight: microWidgetHeight ?? this.microWidgetHeight,
-        microFontSize: microFontSize ?? this.microFontSize,
-        microIntWidth: microIntWidth ?? this.microIntWidth,
-        microValueWidth: microValueWidth ?? this.microValueWidth,
-        microPercentWidth: microPercentWidth ?? this.microPercentWidth,
-        valueBackground: valueBackground ?? this.valueBackground,
-        borderAccent: borderAccent ?? this.borderAccent,
-        dangerColor: dangerColor ?? this.dangerColor,
-        neutralSurface: neutralSurface ?? this.neutralSurface,
-      );
+    Color? bullColor,
+    Color? bearColor,
+    Color? surfaceElevated,
+    double? cornerRadius,
+    double? overlayMaxHeight,
+  }) => IronWidgetsTheme(
+    darkRed: darkRed ?? this.darkRed,
+    gold: gold ?? this.gold,
+    darkGray: darkGray ?? this.darkGray,
+    baseStyleValue: baseStyleValue ?? this.baseStyleValue,
+    baseStyleLabel: baseStyleLabel ?? this.baseStyleLabel,
+    baseStyleTitle: baseStyleTitle ?? this.baseStyleTitle,
+    baseStylePercent: baseStylePercent ?? this.baseStylePercent,
+    microWidgetHeight: microWidgetHeight ?? this.microWidgetHeight,
+    microFontSize: microFontSize ?? this.microFontSize,
+    microIntWidth: microIntWidth ?? this.microIntWidth,
+    microValueWidth: microValueWidth ?? this.microValueWidth,
+    microPercentWidth: microPercentWidth ?? this.microPercentWidth,
+    valueBackground: valueBackground ?? this.valueBackground,
+    borderAccent: borderAccent ?? this.borderAccent,
+    dangerColor: dangerColor ?? this.dangerColor,
+    neutralSurface: neutralSurface ?? this.neutralSurface,
+    bullColor: bullColor ?? this.bullColor,
+    bearColor: bearColor ?? this.bearColor,
+    surfaceElevated: surfaceElevated ?? this.surfaceElevated,
+    cornerRadius: cornerRadius ?? this.cornerRadius,
+    overlayMaxHeight: overlayMaxHeight ?? this.overlayMaxHeight,
+  );
 
   @override
   IronWidgetsTheme lerp(
@@ -237,19 +273,37 @@ class IronWidgetsTheme extends ThemeExtension<IronWidgetsTheme> {
       baseStyleValue: TextStyle.lerp(baseStyleValue, other.baseStyleValue, t)!,
       baseStyleLabel: TextStyle.lerp(baseStyleLabel, other.baseStyleLabel, t)!,
       baseStyleTitle: TextStyle.lerp(baseStyleTitle, other.baseStyleTitle, t)!,
-      baseStylePercent:
-          TextStyle.lerp(baseStylePercent, other.baseStylePercent, t)!,
-      microWidgetHeight:
-          lerpDouble(microWidgetHeight, other.microWidgetHeight, t)!,
+      baseStylePercent: TextStyle.lerp(
+        baseStylePercent,
+        other.baseStylePercent,
+        t,
+      )!,
+      microWidgetHeight: lerpDouble(
+        microWidgetHeight,
+        other.microWidgetHeight,
+        t,
+      )!,
       microFontSize: lerpDouble(microFontSize, other.microFontSize, t)!,
       microIntWidth: lerpDouble(microIntWidth, other.microIntWidth, t)!,
       microValueWidth: lerpDouble(microValueWidth, other.microValueWidth, t)!,
-      microPercentWidth:
-          lerpDouble(microPercentWidth, other.microPercentWidth, t)!,
+      microPercentWidth: lerpDouble(
+        microPercentWidth,
+        other.microPercentWidth,
+        t,
+      )!,
       valueBackground: Color.lerp(valueBackground, other.valueBackground, t)!,
       borderAccent: Color.lerp(borderAccent, other.borderAccent, t)!,
       dangerColor: Color.lerp(dangerColor, other.dangerColor, t)!,
       neutralSurface: Color.lerp(neutralSurface, other.neutralSurface, t)!,
+      bullColor: Color.lerp(bullColor, other.bullColor, t)!,
+      bearColor: Color.lerp(bearColor, other.bearColor, t)!,
+      surfaceElevated: Color.lerp(surfaceElevated, other.surfaceElevated, t)!,
+      cornerRadius: lerpDouble(cornerRadius, other.cornerRadius, t)!,
+      overlayMaxHeight: lerpDouble(
+        overlayMaxHeight,
+        other.overlayMaxHeight,
+        t,
+      )!,
     );
   }
 
@@ -272,26 +326,36 @@ class IronWidgetsTheme extends ThemeExtension<IronWidgetsTheme> {
         other.valueBackground == valueBackground &&
         other.borderAccent == borderAccent &&
         other.dangerColor == dangerColor &&
-        other.neutralSurface == neutralSurface;
+        other.neutralSurface == neutralSurface &&
+        other.bullColor == bullColor &&
+        other.bearColor == bearColor &&
+        other.surfaceElevated == surfaceElevated &&
+        other.cornerRadius == cornerRadius &&
+        other.overlayMaxHeight == overlayMaxHeight;
   }
 
   @override
-  int get hashCode => Object.hash(
-        darkRed,
-        gold,
-        darkGray,
-        baseStyleValue,
-        baseStyleLabel,
-        baseStyleTitle,
-        baseStylePercent,
-        microWidgetHeight,
-        microFontSize,
-        microIntWidth,
-        microValueWidth,
-        microPercentWidth,
-        valueBackground,
-        borderAccent,
-        dangerColor,
-        neutralSurface,
-      );
+  int get hashCode => Object.hashAll([
+    darkRed,
+    gold,
+    darkGray,
+    baseStyleValue,
+    baseStyleLabel,
+    baseStyleTitle,
+    baseStylePercent,
+    microWidgetHeight,
+    microFontSize,
+    microIntWidth,
+    microValueWidth,
+    microPercentWidth,
+    valueBackground,
+    borderAccent,
+    dangerColor,
+    neutralSurface,
+    bullColor,
+    bearColor,
+    surfaceElevated,
+    cornerRadius,
+    overlayMaxHeight,
+  ]);
 }

@@ -34,6 +34,20 @@
 /// | [IronSelect] | Single-select bottom-sheet picker |
 /// | [IronEnum] | Enum single-select picker |
 /// | [IronMultiSelector] | Multi-select with FilterChip display |
+/// | [IronDeltaBadge] | Signed change pill (bull/bear) |
+/// | [IronPriceTicker] | Price with directional flash on change |
+/// | [IronCountdown] | Ticker-driven pausable countdown |
+/// | [IronSparkline] | Mini trend line (CustomPainter) |
+/// | [IronSegmented] | Segmented control (LONG/SHORT, filters) |
+/// | [IronPercentSlider] | Percent slider with presets and editor |
+/// | [IronStepper] | Numeric stepper with hold-to-repeat |
+/// | [IronActionButton] | Large CTA (primary/success/danger) |
+/// | [IronTag] | Mini metadata chip (gold/bull/bear/neutral) |
+/// | [IronRangeBar] | SL/entry/TP range bar with price marker |
+/// | [IronGauge] | Arc-reactor gauge with thresholds |
+/// | [ShowGrid] | Stats header grid of Show cells |
+/// | [IronPanel] | Elevated card with gold header (collapsible) |
+/// | [IronTabs] | Compact tabs with gold underline indicator |
 /// | [Show] | Single label/value row |
 /// | [ShowValuesColumn] | Two-row value panel |
 /// | [ShowPercColumn] | Two-row percentage panel |
@@ -47,13 +61,28 @@ export 'src/theme/iron_widgets_theme.dart';
 export 'src/theme/iron_widgets_theme_scope.dart';
 
 // Widgets
+export 'src/iron_widgets/iron_action_button.dart';
 export 'src/iron_widgets/iron_check.dart';
+export 'src/iron_widgets/iron_countdown.dart';
+export 'src/iron_widgets/iron_delta_badge.dart';
 export 'src/iron_widgets/iron_editor.dart';
 export 'src/iron_widgets/iron_enum.dart';
+export 'src/iron_widgets/iron_gauge.dart';
 export 'src/iron_widgets/iron_label.dart';
 export 'src/iron_widgets/iron_micro_editor.dart';
 export 'src/iron_widgets/iron_micro_switch.dart';
 export 'src/iron_widgets/iron_mini_text.dart';
 export 'src/iron_widgets/iron_multi_selector.dart';
+export 'src/iron_widgets/iron_panel.dart';
+export 'src/iron_widgets/iron_percent_slider.dart';
+export 'src/iron_widgets/iron_price_ticker.dart';
+export 'src/iron_widgets/iron_range_bar.dart';
+export 'src/iron_widgets/iron_segmented.dart';
 export 'src/iron_widgets/iron_select.dart';
+export 'src/iron_widgets/iron_select_mode.dart';
 export 'src/iron_widgets/iron_shows.dart';
+export 'src/iron_widgets/iron_sparkline.dart';
+export 'src/iron_widgets/iron_stepper.dart';
+export 'src/iron_widgets/iron_tabs.dart';
+export 'src/iron_widgets/iron_tag.dart';
+export 'src/iron_widgets/show_grid.dart';

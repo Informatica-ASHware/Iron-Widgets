@@ -114,7 +114,8 @@ class CustomBottomSheetSelector<T> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       CustomBottomSheetButton(
-                                        trailing: buttonType ==
+                                        trailing:
+                                            buttonType ==
                                                 CustomDropdownButtonType
                                                     .multiSelect
                                             ? _SelectionIndicator(
@@ -145,8 +146,9 @@ class CustomBottomSheetSelector<T> {
                                             setState(() {});
                                           } else {
                                             selectedList_.clear();
-                                            selectedList_
-                                                .add(item.buttonObjectValue);
+                                            selectedList_.add(
+                                              item.buttonObjectValue,
+                                            );
                                             selectionDone = true;
                                             Navigator.pop(buildContext);
                                           }
@@ -213,22 +215,20 @@ class _SelectionIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => DecoratedBox(
-        decoration: BoxDecoration(
-          color: selected ? selectedItemColor : Colors.white,
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: selected ? Colors.transparent : Colors.grey,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(3),
-          child: Icon(
-            Icons.done,
-            color: selected ? Colors.white : Colors.transparent,
-            size: 20,
-          ),
-        ),
-      );
+    decoration: BoxDecoration(
+      color: selected ? selectedItemColor : Colors.white,
+      shape: BoxShape.circle,
+      border: Border.all(color: selected ? Colors.transparent : Colors.grey),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(3),
+      child: Icon(
+        Icons.done,
+        color: selected ? Colors.white : Colors.transparent,
+        size: 20,
+      ),
+    ),
+  );
 }
 
 class _AllRow extends StatelessWidget {
@@ -246,16 +246,16 @@ class _AllRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomBottomSheetButton(
-        trailing: _SelectionIndicator(
-          selected: isAllSelected,
-          selectedItemColor: selectedItemColor,
-        ),
-        onPressed: onPressed,
-        buttonTextStyle: defaultTextStyle(
-          color: isAllSelected ? selectedItemColor : Colors.black,
-        ),
-        buttonText: allOptionText,
-      );
+    trailing: _SelectionIndicator(
+      selected: isAllSelected,
+      selectedItemColor: selectedItemColor,
+    ),
+    onPressed: onPressed,
+    buttonTextStyle: defaultTextStyle(
+      color: isAllSelected ? selectedItemColor : Colors.black,
+    ),
+    buttonText: allOptionText,
+  );
 }
 
 class _ActionButton extends StatelessWidget {
@@ -290,9 +290,7 @@ class _ActionButton extends StatelessWidget {
       child: MaterialButton(
         onPressed: onTap,
         color: Colors.grey.shade200,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         minWidth: screenWidth - 40,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

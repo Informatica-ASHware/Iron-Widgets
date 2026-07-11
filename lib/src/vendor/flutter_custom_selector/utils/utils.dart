@@ -23,18 +23,17 @@ TextStyle defaultTextStyle({
   TextDecoration decoration = TextDecoration.none,
   Color color = Colors.black,
   FontStyle fontStyle = FontStyle.normal,
-}) =>
-    TextStyle(
-      fontSize: fontSize,
-      fontWeight: fontWeight,
-      fontFamily: fontFamily,
-      decoration: decoration,
-      color: color,
-      fontStyle: fontStyle,
-    );
+}) => TextStyle(
+  fontSize: fontSize,
+  fontWeight: fontWeight,
+  fontFamily: fontFamily,
+  decoration: decoration,
+  color: color,
+  fontStyle: fontStyle,
+);
 
 /// Returns a rounded [OutlineInputBorder].
 InputBorder inputFieldBorder({Color? color}) => OutlineInputBorder(
-      borderRadius: BorderRadius.circular(borderRadius),
-      borderSide: BorderSide(color: color ?? borderColor),
-    );
+  borderRadius: BorderRadius.circular(borderRadius),
+  borderSide: BorderSide(color: color ?? borderColor),
+);

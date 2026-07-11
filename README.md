@@ -20,12 +20,30 @@ existing `MaterialApp`.
 | `IronMicroSwitch` | Compact toggle button (gold / white) |
 | `IronMicroEditor` | Inline numeric text field |
 | `IronEditor` | Full text editor with optional debounce |
-| `IronSelect<T>` | Single-select bottom-sheet picker |
-| `IronEnum<T>` | Enum single-select picker |
-| `IronMultiSelector<T>` | Multi-select with Material 3 FilterChips |
+| `IronSelect<T>` | Single-select picker — bottom sheet or anchored dropdown (`IronSelectMode`) |
+| `IronEnum<T>` | Enum single-select picker (same modes) |
+| `IronMultiSelector<T>` | Multi-select — FilterChips or dropdown with All row and immediate apply |
+| `IronDeltaBadge` | Signed change pill (bull / bear / neutral) |
+| `IronPriceTicker` | Price with directional flash on change |
+| `IronCountdown` | Ticker-driven pausable countdown |
+| `IronSparkline` | Zero-dependency mini trend line |
+| `IronSegmented<T>` | Segmented control (LONG/SHORT, filters) |
+| `IronPercentSlider` | Percent slider with preset chips and coupled editor |
+| `IronStepper` | Numeric stepper with hold-to-repeat |
+| `IronActionButton` | Large CTA (primary / success / danger, loading) |
+| `IronTag` | Mini metadata chip (gold / bull / bear / neutral) |
+| `IronRangeBar` | SL → TP range bar with entry line and price marker |
+| `IronGauge` | Arc-reactor gauge with thresholds |
+| `ShowGrid` | Stats-header grid of `Show` cells |
+| `IronPanel` | Elevated card with gold header (collapsible) |
+| `IronTabs` | Compact tabs with gold underline indicator |
 | `Show` | Single label/value row |
 | `ShowValuesColumn` | Two-row value panel |
 | `ShowPercColumn` | Two-row percentage panel |
+
+Desktop-first keyboard support across the interactive widgets, semantic
+bull/bear/gold theming via `IronWidgetsTheme`, and **zero new
+dependencies** (all custom painting is `CustomPainter`-based).
 
 ---
 

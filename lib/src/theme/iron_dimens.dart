@@ -19,4 +19,12 @@ abstract final class IronDimens {
 
   /// Column width for percentage display cells.  Legacy: `widthPercent = 60`.
   static const double microPercentWidth = 60;
+
+  /// Default corner radius for rounded surfaces (dropdown menus, panels,
+  /// action buttons, tags).  Introduced in US-2.01.
+  static const double cornerRadius = 8;
+
+  /// Default maximum height for anchored overlay menus before the option
+  /// list scrolls internally.  Introduced in US-2.01.
+  static const double overlayMaxHeight = 320;
 }

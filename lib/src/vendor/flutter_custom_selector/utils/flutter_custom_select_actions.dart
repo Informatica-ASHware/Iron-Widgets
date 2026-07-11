@@ -25,8 +25,7 @@ class CustomMultiSelectDropdownActions<T> {
     if (val != null && val.trim().isNotEmpty) {
       return allItems
           .where(
-            (item) =>
-                item.buttonText.toLowerCase().contains(val.toLowerCase()),
+            (item) => item.buttonText.toLowerCase().contains(val.toLowerCase()),
           )
           .toList();
     }

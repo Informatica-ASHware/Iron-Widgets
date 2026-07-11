@@ -9,6 +9,8 @@ import 'iron_label.dart';
 /// **controlled** [StatelessWidget]: the parent owns the [value] state and
 /// must call [setState] in response to [onChanged].
 ///
+/// Overflow-safe: long labels scale down to fit within [width].
+///
 /// ### Legacy change
 /// The original widget stored `_value` locally without syncing to new
 /// `widget.value` props.  [IronCheck] reads `value` directly so the checkbox
@@ -67,7 +69,14 @@ class IronCheck extends StatelessWidget {
         width: width,
         child: Row(
           children: [
-            if (label.isNotEmpty) IronLabel(label),
+            if (label.isNotEmpty)
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerLeft,
+                  child: IronLabel(label),
+                ),
+              ),
             Checkbox(
               value: value,
               onChanged: enabled

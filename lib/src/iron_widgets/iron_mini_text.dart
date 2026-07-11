@@ -50,9 +50,7 @@ class IronMiniText extends StatelessWidget {
   /// Returns [TextAlign.right] when [text] starts with a digit, minus, or dot.
   static TextAlign _alignFor(String text) {
     if (text.isEmpty) return TextAlign.left;
-    return '-0123456789.'.contains(text[0])
-        ? TextAlign.right
-        : TextAlign.left;
+    return '-0123456789.'.contains(text[0]) ? TextAlign.right : TextAlign.left;
   }
 
   @override
@@ -62,8 +60,9 @@ class IronMiniText extends StatelessWidget {
 
     // Micro widgets use a fixed small font by design, but we honour the OS
     // text-scaling factor so users with accessibility needs are not locked out.
-    final scaledFontSize =
-        MediaQuery.textScalerOf(context).scale(effectiveFontSize);
+    final scaledFontSize = MediaQuery.textScalerOf(
+      context,
+    ).scale(effectiveFontSize);
 
     return Semantics(
       label: semanticLabel ?? text,
@@ -72,10 +71,7 @@ class IronMiniText extends StatelessWidget {
         margin: margin == null ? null : EdgeInsets.all(margin!),
         child: Text(
           text,
-          style: TextStyle(
-            fontSize: scaledFontSize,
-            color: color,
-          ),
+          style: TextStyle(fontSize: scaledFontSize, color: color),
           textAlign: _alignFor(text),
         ),
       ),

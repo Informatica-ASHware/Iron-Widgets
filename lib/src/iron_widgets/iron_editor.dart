@@ -10,6 +10,10 @@ import 'iron_label.dart';
 /// conflated `text` (initial value) with live state; this version makes the
 /// distinction explicit via [initialValue] / [controller].
 ///
+/// Overflow-safe: the declared [width] bounds the whole widget and the
+/// field flexes beside the label; multi-line fields size to their
+/// intrinsic height.
+///
 /// ## Controlled vs uncontrolled
 /// - **Uncontrolled** (default): pass [initialValue].  External changes after
 ///   construction are ignored (matches legacy behaviour).
@@ -124,18 +128,20 @@ class _IronEditorState extends State<IronEditor> {
 
   @override
   Widget build(BuildContext context) {
-    final fieldHeight =
-        widget.lines == 1 ? 30.0 : (widget.lines * 18.0);
-    final totalHeight =
-        (widget.lines == 1 ? 40.0 : (widget.lines * 18.0)) +
-            (widget.labelOnTop ? 20.0 : 0.0);
+    final singleLine = widget.lines == 1;
+    // Fixed heights only apply to single-line fields; multi-line fields
+    // size to their intrinsic height (the legacy `lines * 18` formula
+    // undercounted the TextField and overflowed at the bottom).
+    final double? fieldHeight = singleLine ? 30 : null;
+    final double? totalHeight = singleLine
+        ? 40.0 + (widget.labelOnTop ? 20.0 : 0.0)
+        : null;
 
     final field = Semantics(
       label: widget.semanticLabel ?? widget.label,
       textField: true,
       enabled: widget.enabled,
       child: SizedBox(
-        width: widget.width,
         height: widget.lines == 1 ? 30 : null,
         child: TextField(
           controller: _controller,
@@ -157,15 +163,8 @@ class _IronEditorState extends State<IronEditor> {
       ),
     );
 
-    final children = <Widget>[
-      if (widget.label.isNotEmpty) IronLabel(widget.label),
-      SizedBox(
-        width: widget.width,
-        height: fieldHeight,
-        child: field,
-      ),
-    ];
-
+    // The declared [width] bounds the whole widget; the field flexes to
+    // the remaining space so a beside-label never causes an overflow.
     return SizedBox(
       width: widget.width,
       height: totalHeight,
@@ -175,12 +174,21 @@ class _IronEditorState extends State<IronEditor> {
             ? Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: children,
+                children: [
+                  if (widget.label.isNotEmpty) IronLabel(widget.label),
+                  field,
+                ],
               )
             : Row(
-                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: children,
+                children: [
+                  if (widget.label.isNotEmpty)
+                    Flexible(child: IronLabel(widget.label)),
+                  Expanded(
+                    flex: 3,
+                    child: SizedBox(height: fieldHeight, child: field),
+                  ),
+                ],
               ),
       ),
     );

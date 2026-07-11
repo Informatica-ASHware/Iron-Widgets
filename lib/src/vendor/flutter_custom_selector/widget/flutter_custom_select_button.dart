@@ -30,24 +30,24 @@ class CustomBottomSheetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialButton(
-        onPressed: onPressed,
-        splashColor: Colors.grey.shade200,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-          child: Row(
-            children: [
-              leading ?? const SizedBox.shrink(),
-              SizedBox(width: leading != null ? 10 : 0),
-              Expanded(
-                child: Text(
-                  buttonText,
-                  style: buttonTextStyle ?? defaultTextStyle(),
-                ),
-              ),
-              SizedBox(width: trailing != null ? 10 : 0),
-              trailing ?? const SizedBox.shrink(),
-            ],
+    onPressed: onPressed,
+    splashColor: Colors.grey.shade200,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+      child: Row(
+        children: [
+          leading ?? const SizedBox.shrink(),
+          SizedBox(width: leading != null ? 10 : 0),
+          Expanded(
+            child: Text(
+              buttonText,
+              style: buttonTextStyle ?? defaultTextStyle(),
+            ),
           ),
-        ),
-      );
+          SizedBox(width: trailing != null ? 10 : 0),
+          trailing ?? const SizedBox.shrink(),
+        ],
+      ),
+    ),
+  );
 }

@@ -102,7 +102,8 @@ class _IronMicroEditorState extends State<IronMicroEditor> {
     final scaledFontSize = scaler.scale(effectiveFontSize);
 
     return Semantics(
-      label: widget.semanticLabel ??
+      label:
+          widget.semanticLabel ??
           (widget.label.isNotEmpty ? widget.label : 'numeric editor'),
       textField: true,
       enabled: widget.enabled,

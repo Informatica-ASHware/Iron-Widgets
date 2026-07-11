@@ -70,8 +70,7 @@ class CustomMultiSelectField<T> extends StatefulWidget {
       _CustomMultiSelectFieldState<T>();
 }
 
-class _CustomMultiSelectFieldState<T>
-    extends State<CustomMultiSelectField<T>> {
+class _CustomMultiSelectFieldState<T> extends State<CustomMultiSelectField<T>> {
   final TextEditingController _controller = TextEditingController();
   late List<T> _selectedItems;
   late List<CustomMultiSelectDropdownItem<T>> _dropdownItems;
@@ -102,78 +101,71 @@ class _CustomMultiSelectFieldState<T>
 
   @override
   Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          GestureDetector(
-            onTap: () async {
-              final result =
-                  await CustomBottomSheetSelector<T>().customBottomSheet(
-                buildContext: context,
-                selectedItemColor: widget.selectedItemColor,
-                initialSelection: _selectedItems,
-                buttonType: CustomDropdownButtonType.multiSelect,
-                headerName: widget.title,
-                dropdownItems: _dropdownItems,
-                isAllOptionEnable: widget.enableAllOptionSelect,
-                allOptionText: widget.allOptionText,
-                doneButtonText: widget.doneButtonText,
-                cancelButtonText: widget.cancelButtonText,
-              );
-              if (!mounted) return;
-              if (result[selectedList] != null) {
-                widget.onSelectionDone?.call(result[selectedList]!);
-                setState(() {
-                  _selectedItems = List<T>.from(result[selectedList]!);
-                });
-              }
-            },
-            child: SizedBox(
-              width: widget.width ?? double.infinity,
-              child: TextFormField(
-                controller: _controller,
-                readOnly: true,
-                enabled: false,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (_) => widget.validator?.call(_selectedItems),
-                style: defaultTextStyle(fontSize: 16),
-                decoration: widget.decoration ??
-                    InputDecoration(
-                      contentPadding: const EdgeInsets.all(15),
-                      suffixIcon:
-                          const Icon(Icons.keyboard_arrow_down_outlined),
-                      suffixIconColor: Colors.black,
-                      enabledBorder: inputFieldBorder(),
-                      border: inputFieldBorder(),
-                      focusedBorder: inputFieldBorder(),
-                    ),
-              ),
-            ),
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      GestureDetector(
+        onTap: () async {
+          final result = await CustomBottomSheetSelector<T>().customBottomSheet(
+            buildContext: context,
+            selectedItemColor: widget.selectedItemColor,
+            initialSelection: _selectedItems,
+            buttonType: CustomDropdownButtonType.multiSelect,
+            headerName: widget.title,
+            dropdownItems: _dropdownItems,
+            isAllOptionEnable: widget.enableAllOptionSelect,
+            allOptionText: widget.allOptionText,
+            doneButtonText: widget.doneButtonText,
+            cancelButtonText: widget.cancelButtonText,
+          );
+          if (!mounted) return;
+          if (result[selectedList] != null) {
+            widget.onSelectionDone?.call(result[selectedList]!);
+            setState(() {
+              _selectedItems = List<T>.from(result[selectedList]!);
+            });
+          }
+        },
+        child: SizedBox(
+          width: widget.width ?? double.infinity,
+          child: TextFormField(
+            controller: _controller,
+            readOnly: true,
+            enabled: false,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (_) => widget.validator?.call(_selectedItems),
+            style: defaultTextStyle(fontSize: 16),
+            decoration:
+                widget.decoration ??
+                InputDecoration(
+                  contentPadding: const EdgeInsets.all(15),
+                  suffixIcon: const Icon(Icons.keyboard_arrow_down_outlined),
+                  suffixIconColor: Colors.black,
+                  enabledBorder: inputFieldBorder(),
+                  border: inputFieldBorder(),
+                  focusedBorder: inputFieldBorder(),
+                ),
           ),
-          if (_selectedItems.isNotEmpty) ...[
-            const SizedBox(height: 4),
-            Wrap(
-              spacing: 4,
-              runSpacing: 4,
-              children: _dropdownItems
-                  .where(
-                    (item) =>
-                        _selectedItems.contains(item.buttonObjectValue),
-                  )
-                  .map(
-                    (item) => Chip(
-                      label: Text(
-                        item.buttonText,
-                        style: defaultTextStyle(),
-                      ),
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      backgroundColor: Colors.grey.shade300,
-                    ),
-                  )
-                  .toList(),
-            ),
-            const SizedBox(height: 5),
-          ],
-        ],
-      );
+        ),
+      ),
+      if (_selectedItems.isNotEmpty) ...[
+        const SizedBox(height: 4),
+        Wrap(
+          spacing: 4,
+          runSpacing: 4,
+          children: _dropdownItems
+              .where((item) => _selectedItems.contains(item.buttonObjectValue))
+              .map(
+                (item) => Chip(
+                  label: Text(item.buttonText, style: defaultTextStyle()),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  backgroundColor: Colors.grey.shade300,
+                ),
+              )
+              .toList(),
+        ),
+        const SizedBox(height: 5),
+      ],
+    ],
+  );
 }
