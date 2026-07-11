@@ -267,8 +267,30 @@ IronMultiSelector<T>({
   String doneButtonText = 'Done',
   String cancelButtonText = 'Cancel',
   String? semanticLabel,
+  IronSelectMode mode = IronSelectMode.bottomSheet,
+  double? menuWidth,
+  double? menuMaxHeight,
+  bool searchable = false,
+  bool enabled = true,
+  String Function(List<T> selected)? summaryBuilder,
 })
 ```
+
+Supports the same presentation modes as `IronSelect<T>` (see
+[Presentation modes](#presentation-modes-us-202) above). Dropdown-mode
+specifics (US-2.04):
+
+- Rows render an Iron-style checkbox and **apply immediately**: every
+  toggle fires `onChanged` with the full new selection; there is no Done
+  step, so `doneButtonText` / `cancelButtonText` only apply to the
+  bottom sheet.
+- The panel stays open while toggling; it closes on outside tap, `Esc`,
+  focus loss or ancestor scroll. `Enter`/`Space` toggle the highlighted
+  row.
+- The `allOptionText` row toggles the whole set and hides while a search
+  query is active.
+- The trigger shows a compact summary instead of chips: the single item's
+  label, or `'n selected'`, customisable via `summaryBuilder`.
 
 ### `Show`
 

@@ -26,6 +26,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   `searchable`, `enabled`). In dropdown mode the keyboard highlight opens
   on the current value (non-nullable in `IronEnum`), marked with a gold
   check. Default remains `bottomSheet`.
+- **US-2.04** – `IronMultiSelector` gains dropdown mode with immediate
+  apply: rows show an Iron-style checkbox (`dangerColor` fill, matching
+  `IronCheck`), every toggle fires `onChanged` and the panel stays open;
+  an `allOptionText` row toggles the whole set (hidden while searching);
+  the compact trigger shows a selection summary (`'n selected'`,
+  customisable via the new `summaryBuilder`). Same new parameters as the
+  other selectors (`mode`, `menuWidth`, `menuMaxHeight`, `searchable`,
+  `enabled`). Closes Phase 1 of `SPEC_WIDGETS_ROADMAP`; the example app
+  gains a "Selectors – Dropdown Mode" section.
 
 ## 2026-04-28
 

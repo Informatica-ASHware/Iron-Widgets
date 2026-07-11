@@ -56,13 +56,32 @@ bool ironDropdownForPlatform(
 /// Visual language: `surfaceElevated` panel, `borderAccent` hairline,
 /// `cornerRadius` corners and a gold check on the selected row — the Iron
 /// translation of the reference dropdown.
+///
+/// ## Multi-select mode (US-2.04)
+/// Passing a non-null [multiSelected] set switches the field to
+/// multi-select: rows render a leading Iron-style checkbox (fill
+/// `dangerColor`, matching [IronCheck]), tapping or pressing
+/// `Enter`/`Space` toggles the highlighted row **without closing** the
+/// panel (immediate apply), and an optional [allOptionText] row toggles
+/// the whole set. The trigger shows [triggerText] (usually a selection
+/// summary) or the dimmed [placeholder] when null. The `All` row is
+/// hidden while a search query is active, since "all" would be ambiguous
+/// over a filtered subset.
 class IronDropdownField<T> extends StatefulWidget {
   /// Creates the internal dropdown field.
+  ///
+  /// Exactly one behaviour must be wired: [onSelected] (single-select)
+  /// or [multiSelected] + [onToggled] (multi-select).
   const IronDropdownField({
     super.key,
     required this.options,
-    required this.onSelected,
+    this.onSelected,
     this.value,
+    this.multiSelected,
+    this.onToggled,
+    this.onToggleAll,
+    this.allOptionText,
+    this.triggerText,
     this.itemAsString,
     this.placeholder = '',
     this.height = 30,
@@ -74,16 +93,44 @@ class IronDropdownField<T> extends StatefulWidget {
     this.emptyResultText = 'No results',
     this.enabled = true,
     this.semanticLabel,
-  });
+  }) : assert(
+         multiSelected != null || onSelected != null,
+         'Single-select mode requires onSelected.',
+       ),
+       assert(
+         multiSelected == null || onToggled != null,
+         'Multi-select mode requires onToggled.',
+       );
 
   /// Full list of selectable options.
   final List<T> options;
 
-  /// Called when the user picks an option. The menu closes afterwards.
-  final ValueChanged<T> onSelected;
+  /// Single-select: called when the user picks an option. The menu closes
+  /// afterwards. Ignored in multi-select mode.
+  final ValueChanged<T>? onSelected;
 
-  /// Currently selected value, marked with a gold check in the menu.
+  /// Single-select: currently selected value, marked with a gold check in
+  /// the menu.
   final T? value;
+
+  /// Multi-select: current selection. A non-null value activates
+  /// multi-select mode.
+  final Set<T>? multiSelected;
+
+  /// Multi-select: called when a row is toggled. The panel stays open.
+  final ValueChanged<T>? onToggled;
+
+  /// Multi-select: called when the [allOptionText] row is tapped.
+  final VoidCallback? onToggleAll;
+
+  /// Multi-select: label of the select-all row shown at the top of the
+  /// menu. `null` hides the row.
+  final String? allOptionText;
+
+  /// Trigger text override (e.g. a multi-select summary). When `null`,
+  /// single-select derives it from [value]; the dimmed [placeholder] is
+  /// shown as fallback.
+  final String? triggerText;
 
   /// Converts an option to its display string. Falls back to [toString].
   final String Function(T)? itemAsString;
@@ -173,6 +220,19 @@ class _IronDropdownFieldState<T> extends State<IronDropdownField<T>> {
 
   // ── Derived state ─────────────────────────────────────────────────────
 
+  bool get _multi => widget.multiSelected != null;
+
+  /// Whether the select-all row is currently visible (multi mode, an
+  /// [IronDropdownField.allOptionText] provided, and no active filter).
+  bool get _hasAllRow =>
+      _multi && widget.allOptionText != null && _query.isEmpty;
+
+  /// Offset applied to option indices when the All row occupies index 0.
+  int get _allRowOffset => _hasAllRow ? 1 : 0;
+
+  /// Total navigable rows (options after filtering + optional All row).
+  int get _rowCount => _filtered.length + _allRowOffset;
+
   String _asString(T option) =>
       widget.itemAsString?.call(option) ?? option.toString();
 
@@ -207,8 +267,14 @@ class _IronDropdownFieldState<T> extends State<IronDropdownField<T>> {
 
     final configuredMax = widget.menuMaxHeight ?? theme.overlayMaxHeight;
     final searchExtra = widget.searchable ? 52.0 : 0.0;
+    final allRowExtra = _multi && widget.allOptionText != null
+        ? kIronDropdownRowHeight
+        : 0;
     final contentEstimate =
-        8 + searchExtra + widget.options.length * kIronDropdownRowHeight;
+        8 +
+        searchExtra +
+        allRowExtra +
+        widget.options.length * kIronDropdownRowHeight;
     final spaceBelow = screen.height - (origin.dy + triggerH) - 8;
     final spaceAbove = origin.dy - 8;
     final desired = math.min(configuredMax, contentEstimate);
@@ -219,10 +285,10 @@ class _IronDropdownFieldState<T> extends State<IronDropdownField<T>> {
       math.min(configuredMax, _openUp ? spaceAbove : spaceBelow),
     );
 
-    final selectedIndex = widget.value == null
+    final selectedIndex = _multi || widget.value == null
         ? -1
         : widget.options.indexOf(widget.value as T);
-    _highlight = selectedIndex >= 0 ? selectedIndex : 0;
+    _highlight = selectedIndex >= 0 ? selectedIndex + _allRowOffset : 0;
     _typed = '';
 
     _attachScrollListener();
@@ -247,8 +313,28 @@ class _IronDropdownFieldState<T> extends State<IronDropdownField<T>> {
   }
 
   void _select(T option) {
-    widget.onSelected(option);
+    widget.onSelected?.call(option);
     _close();
+  }
+
+  /// Activates the row at [rowIndex] (row space: All row first if shown).
+  ///
+  /// Single-select: selects and closes. Multi-select: toggles the option
+  /// (or the whole set for the All row) and keeps the panel open.
+  void _activateRow(int rowIndex) {
+    if (rowIndex < 0 || rowIndex >= _rowCount) return;
+    if (_hasAllRow && rowIndex == 0) {
+      widget.onToggleAll?.call();
+      setState(() => _highlight = 0);
+      return;
+    }
+    final option = _filtered[rowIndex - _allRowOffset];
+    if (_multi) {
+      widget.onToggled?.call(option);
+      setState(() => _highlight = rowIndex);
+    } else {
+      _select(option);
+    }
   }
 
   // ── Ancestor scroll → close ───────────────────────────────────────────
@@ -300,17 +386,17 @@ class _IronDropdownFieldState<T> extends State<IronDropdownField<T>> {
       return KeyEventResult.ignored;
     }
 
-    final filtered = _filtered;
     if (key == LogicalKeyboardKey.escape) {
       _close();
       return KeyEventResult.handled;
     }
+    final rows = _rowCount;
     if (key == LogicalKeyboardKey.arrowDown) {
-      _moveHighlight((_highlight + 1) % math.max(1, filtered.length));
+      _moveHighlight((_highlight + 1) % math.max(1, rows));
       return KeyEventResult.handled;
     }
     if (key == LogicalKeyboardKey.arrowUp) {
-      final len = math.max(1, filtered.length);
+      final len = math.max(1, rows);
       _moveHighlight((_highlight - 1 + len) % len);
       return KeyEventResult.handled;
     }
@@ -319,15 +405,13 @@ class _IronDropdownFieldState<T> extends State<IronDropdownField<T>> {
       return KeyEventResult.handled;
     }
     if (key == LogicalKeyboardKey.end) {
-      _moveHighlight(filtered.length - 1);
+      _moveHighlight(rows - 1);
       return KeyEventResult.handled;
     }
     final selectWithSpace =
         !widget.searchable && key == LogicalKeyboardKey.space;
     if (key == LogicalKeyboardKey.enter || selectWithSpace) {
-      if (_highlight >= 0 && _highlight < filtered.length) {
-        _select(filtered[_highlight]);
-      }
+      _activateRow(_highlight);
       return KeyEventResult.handled;
     }
     if (!widget.searchable) {
@@ -349,7 +433,7 @@ class _IronDropdownFieldState<T> extends State<IronDropdownField<T>> {
     final index = options.indexWhere(
       (o) => _asString(o).toLowerCase().startsWith(_typed),
     );
-    if (index >= 0) _moveHighlight(index);
+    if (index >= 0) _moveHighlight(index + _allRowOffset);
   }
 
   void _moveHighlight(int index) {
@@ -380,7 +464,9 @@ class _IronDropdownFieldState<T> extends State<IronDropdownField<T>> {
   Widget build(BuildContext context) {
     final theme = resolveIronTheme(context);
     final open = _menuCtrl.isShowing;
-    final selText = widget.value == null ? null : _asString(widget.value as T);
+    final selText =
+        widget.triggerText ??
+        (widget.value == null ? null : _asString(widget.value as T));
 
     final Color borderColor;
     if (!widget.enabled) {
@@ -466,7 +552,7 @@ class _IronDropdownFieldState<T> extends State<IronDropdownField<T>> {
     final theme = resolveIronTheme(context);
     final filtered = _filtered;
     final menuWidth = widget.menuWidth ?? _triggerWidth;
-    final highlight = math.min(_highlight, filtered.length - 1);
+    final highlight = math.min(_highlight, filtered.length + _allRowOffset - 1);
 
     final menu = Material(
       color: Colors.transparent,
@@ -505,9 +591,18 @@ class _IronDropdownFieldState<T> extends State<IronDropdownField<T>> {
                       padding: const EdgeInsets.symmetric(vertical: 4),
                       shrinkWrap: true,
                       itemExtent: kIronDropdownRowHeight,
-                      itemCount: filtered.length,
-                      itemBuilder: (context, index) =>
-                          _buildRow(theme, filtered[index], index, highlight),
+                      itemCount: filtered.length + _allRowOffset,
+                      itemBuilder: (context, index) {
+                        if (_hasAllRow && index == 0) {
+                          return _buildAllRow(theme, highlight);
+                        }
+                        return _buildRow(
+                          theme,
+                          filtered[index - _allRowOffset],
+                          index,
+                          highlight,
+                        );
+                      },
                     ),
             ),
           ],
@@ -574,46 +669,119 @@ class _IronDropdownFieldState<T> extends State<IronDropdownField<T>> {
   );
 
   Widget _buildRow(IronWidgetsTheme theme, T option, int index, int highlight) {
-    final selected = widget.value != null && option == widget.value;
+    final selected = _multi
+        ? widget.multiSelected!.contains(option)
+        : widget.value != null && option == widget.value;
     final highlighted = index == highlight;
     final text = _asString(option);
 
     return Semantics(
-      button: true,
-      selected: selected,
+      button: !_multi,
+      checked: _multi ? selected : null,
+      selected: _multi ? null : selected,
       label: text,
-      child: MouseRegion(
-        onEnter: (_) => setState(() => _highlight = index),
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () => _select(option),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            alignment: Alignment.centerLeft,
-            color: highlighted
-                ? theme.gold.withValues(alpha: 0.12)
-                : Colors.transparent,
-            child: Row(
-              children: [
-                Flexible(
-                  child: Text(
-                    text,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.baseStyleValue.copyWith(
-                      color: selected ? theme.gold : Colors.white,
-                    ),
-                  ),
+      child: _rowShell(
+        theme: theme,
+        index: index,
+        highlighted: highlighted,
+        child: Row(
+          children: [
+            if (_multi) ...[
+              _checkboxSquare(theme, selected: selected),
+              const SizedBox(width: 8),
+            ],
+            Flexible(
+              child: Text(
+                text,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: theme.baseStyleValue.copyWith(
+                  color: !_multi && selected ? theme.gold : Colors.white,
                 ),
-                if (selected) ...[
-                  const SizedBox(width: 6),
-                  Icon(Icons.check, size: 16, color: theme.gold),
-                ],
-              ],
+              ),
             ),
-          ),
+            if (!_multi && selected) ...[
+              const SizedBox(width: 6),
+              Icon(Icons.check, size: 16, color: theme.gold),
+            ],
+          ],
         ),
       ),
     );
   }
+
+  Widget _buildAllRow(IronWidgetsTheme theme, int highlight) {
+    final allSelected =
+        widget.multiSelected!.length == widget.options.length &&
+        widget.options.isNotEmpty;
+
+    return Semantics(
+      checked: allSelected,
+      label: widget.allOptionText,
+      child: _rowShell(
+        theme: theme,
+        index: 0,
+        highlighted: highlight == 0,
+        child: Row(
+          children: [
+            _checkboxSquare(theme, selected: allSelected),
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                widget.allOptionText!,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: theme.baseStyleValue.copyWith(
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Shared hover / highlight / tap shell for menu rows.
+  Widget _rowShell({
+    required IronWidgetsTheme theme,
+    required int index,
+    required bool highlighted,
+    required Widget child,
+  }) => MouseRegion(
+    onEnter: (_) => setState(() => _highlight = index),
+    child: GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => _activateRow(index),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        alignment: Alignment.centerLeft,
+        color: highlighted
+            ? theme.gold.withValues(alpha: 0.12)
+            : Colors.transparent,
+        child: child,
+      ),
+    ),
+  );
+
+  /// Iron-style 14×14 checkbox mirroring [IronCheck]'s Material checkbox
+  /// (`dangerColor` fill when selected).
+  Widget _checkboxSquare(IronWidgetsTheme theme, {required bool selected}) =>
+      Container(
+        width: 14,
+        height: 14,
+        decoration: BoxDecoration(
+          color: selected ? theme.dangerColor : Colors.transparent,
+          borderRadius: BorderRadius.circular(3),
+          border: Border.all(
+            color: selected
+                ? theme.dangerColor
+                : theme.borderAccent.withValues(alpha: 0.7),
+          ),
+        ),
+        child: selected
+            ? const Icon(Icons.check, size: 12, color: Colors.white)
+            : null,
+      );
 }
