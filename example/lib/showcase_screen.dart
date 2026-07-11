@@ -4,6 +4,7 @@ import 'package:iron_widgets/iron_widgets.dart';
 import '../sections/dropdown_selectors_section.dart';
 import '../sections/market_indicators_section.dart';
 import '../sections/order_entry_section.dart';
+import '../sections/position_status_section.dart';
 import '../sections/shows_section.dart';
 import '../sections/simple_widgets_section.dart';
 import '../theme_switcher.dart';
@@ -52,6 +53,8 @@ class ShowcaseScreen extends StatelessWidget {
                           MarketIndicatorsSection(),
                           SizedBox(height: 16),
                           OrderEntrySection(),
+                          SizedBox(height: 16),
+                          PositionStatusSection(),
                           SizedBox(height: 16),
                           ShowsSection(),
                           SizedBox(height: 32),

@@ -456,6 +456,79 @@ Large CTA in the Finandy style ("Add SHORT"). `variant` maps to `gold` /
 secondary line (e.g. the estimated size) and `loading` swaps the content
 for a spinner while suppressing taps.
 
+## Position & status (US-2.13 … US-2.16)
+
+### `IronTag`
+
+```dart
+IronTag(
+  String text, {
+  IronTagVariant variant = IronTagVariant.neutral,  // gold | bull | bear | neutral
+  String? semanticLabel,
+})
+```
+
+Mini metadata chip (`SHORT`, `Isol ×20`, `PERP`). Coloured variants use a
+tinted fill with matching hairline border; `neutral` sits on
+`surfaceElevated`. Smaller corner radius than `IronDeltaBadge` so the two
+read as different species.
+
+### `IronRangeBar`
+
+```dart
+IronRangeBar({
+  required double min,        // stop-loss
+  required double max,        // take-profit
+  required double current,    // gold dot (clamped)
+  double? entry,              // gold line + P/L reference
+  bool showLabels = false,    // min (bear) / entry (gold) / max (bull)
+  int precision = 2,
+  double width = 160,
+  double height = 6,
+  String? semanticLabel,
+})
+```
+
+`CustomPainter` range bar: the segment between `entry` (or `min`) and
+`current` fills `bullColor` in profit or `bearColor` in loss.
+
+### `IronGauge`
+
+```dart
+IronGauge({
+  required double value,      // 0..1, clamped
+  String? label,
+  List<double>? thresholds,   // ticks; arc turns dangerColor past the last
+  double size = 72,
+  double strokeWidth = 6,
+  bool showValue = true,
+  String? semanticLabel,
+})
+```
+
+Arc-reactor-style 270° gauge: `gold` arc with a soft glow and a
+concentric inner ring, switching to `dangerColor` once `value` crosses
+the last threshold; each threshold renders as a tick on the track.
+
+### `ShowGrid`
+
+```dart
+ShowItem(String label, String value)   // immutable, value equality
+
+ShowGrid({
+  required List<ShowItem> items,
+  int columns = 2,
+  double columnSpacing = 12,
+  double rowSpacing = 2,
+  String? semanticLabel,
+})
+```
+
+Stats header (Volume / High / Low / Funding) laying `Show` cells out in
+equal-width columns; an incomplete last row is padded to keep columns
+aligned. `Show` has fixed internal widths — allow roughly ≥ 180 px per
+column with the default theme.
+
 ### `Show`
 
 ```dart

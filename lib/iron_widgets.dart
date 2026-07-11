@@ -42,6 +42,10 @@
 /// | [IronPercentSlider] | Percent slider with presets and editor |
 /// | [IronStepper] | Numeric stepper with hold-to-repeat |
 /// | [IronActionButton] | Large CTA (primary/success/danger) |
+/// | [IronTag] | Mini metadata chip (gold/bull/bear/neutral) |
+/// | [IronRangeBar] | SL/entry/TP range bar with price marker |
+/// | [IronGauge] | Arc-reactor gauge with thresholds |
+/// | [ShowGrid] | Stats header grid of Show cells |
 /// | [Show] | Single label/value row |
 /// | [ShowValuesColumn] | Two-row value panel |
 /// | [ShowPercColumn] | Two-row percentage panel |
@@ -61,6 +65,7 @@ export 'src/iron_widgets/iron_countdown.dart';
 export 'src/iron_widgets/iron_delta_badge.dart';
 export 'src/iron_widgets/iron_editor.dart';
 export 'src/iron_widgets/iron_enum.dart';
+export 'src/iron_widgets/iron_gauge.dart';
 export 'src/iron_widgets/iron_label.dart';
 export 'src/iron_widgets/iron_micro_editor.dart';
 export 'src/iron_widgets/iron_micro_switch.dart';
@@ -68,9 +73,12 @@ export 'src/iron_widgets/iron_mini_text.dart';
 export 'src/iron_widgets/iron_multi_selector.dart';
 export 'src/iron_widgets/iron_percent_slider.dart';
 export 'src/iron_widgets/iron_price_ticker.dart';
+export 'src/iron_widgets/iron_range_bar.dart';
 export 'src/iron_widgets/iron_segmented.dart';
 export 'src/iron_widgets/iron_select.dart';
 export 'src/iron_widgets/iron_select_mode.dart';
 export 'src/iron_widgets/iron_shows.dart';
 export 'src/iron_widgets/iron_sparkline.dart';
 export 'src/iron_widgets/iron_stepper.dart';
+export 'src/iron_widgets/iron_tag.dart';
+export 'src/iron_widgets/show_grid.dart';

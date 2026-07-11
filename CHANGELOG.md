@@ -67,6 +67,20 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   `gold`/`bullColor`/`bearColor`, optional `sublabel` and `loading`
   spinner state. Completes Phase 3 (order entry); the example app gains
   an interactive "Order Entry" form section.
+- **US-2.13** – `IronTag`: mini metadata chip with
+  `IronTagVariant.{gold,bull,bear,neutral}` (SHORT / Isol ×20 / PERP
+  style), tinted fills with hairline borders.
+- **US-2.14** – `IronRangeBar`: `CustomPainter` SL→TP range bar with a
+  gold entry line and current-price dot; the entry↔current segment fills
+  `bullColor` in profit or `bearColor` in loss; optional coloured labels
+  and clamped painting for out-of-range values.
+- **US-2.15** – `IronGauge`: arc-reactor-style 270° gauge (`gold` arc
+  with glow and concentric inner ring) for normalized values, threshold
+  ticks and `dangerColor` past the last threshold.
+- **US-2.16** – `ShowGrid` + `ShowItem`: stats-header grid of `Show`
+  cells in equal-width columns with padded incomplete rows. Completes
+  Phase 4 (position & status); the example app gains an interactive
+  "Position & Status" card section.
 
 ## 2026-04-28
 
