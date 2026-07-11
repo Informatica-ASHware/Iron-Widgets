@@ -95,20 +95,17 @@ class _CustomSingleSelectFieldState<T>
 
     return GestureDetector(
       onTap: () async {
-        final result =
-            await CustomBottomSheetSelector<T>().customBottomSheet(
+        final result = await CustomBottomSheetSelector<T>().customBottomSheet(
           buildContext: context,
           selectedItemColor: widget.selectedItemColor,
-          initialSelection:
-              _selectedItem != null ? [_selectedItem as T] : [],
+          initialSelection: _selectedItem != null ? [_selectedItem as T] : [],
           buttonType: CustomDropdownButtonType.singleSelect,
           headerName: widget.title,
           dropdownItems: _buildDropdownItems(widget.items),
           cancelButtonText: widget.cancelButtonText,
         );
         if (!mounted) return;
-        if (result[selectedList] != null &&
-            result[selectedList]!.isNotEmpty) {
+        if (result[selectedList] != null && result[selectedList]!.isNotEmpty) {
           final selected = result[selectedList]!.first;
           widget.onSelectionDone?.call(selected);
           setState(() {
@@ -126,7 +123,8 @@ class _CustomSingleSelectFieldState<T>
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: widget.validator,
           style: defaultTextStyle(fontSize: 16),
-          decoration: widget.decoration ??
+          decoration:
+              widget.decoration ??
               InputDecoration(
                 contentPadding: const EdgeInsets.all(15),
                 labelText: widget.title,

@@ -24,17 +24,17 @@ class _IronWidgetsExampleAppState extends State<IronWidgetsExampleApp> {
 
   @override
   Widget build(BuildContext context) => ListenableBuilder(
-        listenable: _notifier,
-        builder: (context, _) {
-          final (:theme, useIronScope: _) = resolveTheme(_notifier.mode);
-          return MaterialApp(
-            title: 'Iron Widgets',
-            debugShowCheckedModeBanner: false,
-            theme: theme,
-            // IronWidgetsTheme is injected per-screen by ShowcaseScreen so
-            // that the three-mode switcher demo works correctly.
-            home: ShowcaseScreen(notifier: _notifier),
-          );
-        },
+    listenable: _notifier,
+    builder: (context, _) {
+      final (:theme, useIronScope: _) = resolveTheme(_notifier.mode);
+      return MaterialApp(
+        title: 'Iron Widgets',
+        debugShowCheckedModeBanner: false,
+        theme: theme,
+        // IronWidgetsTheme is injected per-screen by ShowcaseScreen so
+        // that the three-mode switcher demo works correctly.
+        home: ShowcaseScreen(notifier: _notifier),
       );
+    },
+  );
 }

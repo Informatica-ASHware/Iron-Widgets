@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:iron_widgets/iron_widgets.dart';
 
 Widget _wrap(Widget child) => MaterialApp(
-      home: IronWidgetsThemeScope(child: Scaffold(body: child)),
-    );
+  home: IronWidgetsThemeScope(child: Scaffold(body: child)),
+);
 
 void main() {
   group('IronLabel', () {
@@ -93,9 +93,7 @@ void main() {
   group('IronMicroSwitch', () {
     testWidgets('renders with correct text', (tester) async {
       await tester.pumpWidget(
-        _wrap(
-          IronMicroSwitch(text: 'HUD', value: false, onChanged: (_) {}),
-        ),
+        _wrap(IronMicroSwitch(text: 'HUD', value: false, onChanged: (_) {})),
       );
       expect(find.text('HUD'), findsOneWidget);
     });
@@ -146,10 +144,7 @@ void main() {
       String? received;
       await tester.pumpWidget(
         _wrap(
-          IronMicroEditor(
-            initialValue: '0',
-            onChanged: (v) => received = v,
-          ),
+          IronMicroEditor(initialValue: '0', onChanged: (v) => received = v),
         ),
       );
       await tester.enterText(find.byType(TextField), '42');
@@ -161,11 +156,7 @@ void main() {
     testWidgets('shows initial value', (tester) async {
       await tester.pumpWidget(
         _wrap(
-          IronEditor(
-            label: 'Name',
-            initialValue: 'Tony',
-            onChanged: (_) {},
-          ),
+          IronEditor(label: 'Name', initialValue: 'Tony', onChanged: (_) {}),
         ),
       );
       expect(find.text('Tony'), findsOneWidget);
@@ -174,12 +165,7 @@ void main() {
     testWidgets('fires onChanged on input', (tester) async {
       String? received;
       await tester.pumpWidget(
-        _wrap(
-          IronEditor(
-            label: 'Name',
-            onChanged: (v) => received = v,
-          ),
-        ),
+        _wrap(IronEditor(label: 'Name', onChanged: (v) => received = v)),
       );
       await tester.enterText(find.byType(TextField), 'Pepper');
       expect(received, 'Pepper');
@@ -187,9 +173,7 @@ void main() {
 
     testWidgets('shows label with colon by default', (tester) async {
       await tester.pumpWidget(
-        _wrap(
-          IronEditor(label: 'Field', onChanged: (_) {}),
-        ),
+        _wrap(IronEditor(label: 'Field', onChanged: (_) {})),
       );
       expect(find.text('Field:'), findsOneWidget);
     });
@@ -207,12 +191,7 @@ void main() {
     testWidgets('editable mode renders IronMicroEditor', (tester) async {
       await tester.pumpWidget(
         _wrap(
-          Show(
-            label: 'Qty',
-            value: '10',
-            editable: true,
-            onChanged: (_) {},
-          ),
+          Show(label: 'Qty', value: '10', editable: true, onChanged: (_) {}),
         ),
       );
       expect(find.byType(IronMicroEditor), findsOneWidget);

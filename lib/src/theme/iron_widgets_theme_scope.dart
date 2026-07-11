@@ -25,11 +25,7 @@ import '../theme/iron_widgets_theme.dart';
 /// When [theme] is `null`, [IronWidgetsTheme.defaults()] is used.
 class IronWidgetsThemeScope extends StatelessWidget {
   /// Creates an [IronWidgetsThemeScope].
-  const IronWidgetsThemeScope({
-    super.key,
-    required this.child,
-    this.theme,
-  });
+  const IronWidgetsThemeScope({super.key, required this.child, this.theme});
 
   /// The Iron Widgets theme to inject.  Defaults to [IronWidgetsTheme.defaults()].
   final IronWidgetsTheme? theme;
@@ -44,8 +40,7 @@ class IronWidgetsThemeScope extends StatelessWidget {
     return Theme(
       data: parentTheme.copyWith(
         extensions: [
-          ...parentTheme.extensions.values
-              .where((e) => e is! IronWidgetsTheme),
+          ...parentTheme.extensions.values.where((e) => e is! IronWidgetsTheme),
           ironTheme,
         ],
       ),
