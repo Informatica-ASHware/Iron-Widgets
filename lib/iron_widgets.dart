@@ -34,6 +34,10 @@
 /// | [IronSelect] | Single-select bottom-sheet picker |
 /// | [IronEnum] | Enum single-select picker |
 /// | [IronMultiSelector] | Multi-select with FilterChip display |
+/// | [IronDeltaBadge] | Signed change pill (bull/bear) |
+/// | [IronPriceTicker] | Price with directional flash on change |
+/// | [IronCountdown] | Ticker-driven pausable countdown |
+/// | [IronSparkline] | Mini trend line (CustomPainter) |
 /// | [Show] | Single label/value row |
 /// | [ShowValuesColumn] | Two-row value panel |
 /// | [ShowPercColumn] | Two-row percentage panel |
@@ -48,6 +52,8 @@ export 'src/theme/iron_widgets_theme_scope.dart';
 
 // Widgets
 export 'src/iron_widgets/iron_check.dart';
+export 'src/iron_widgets/iron_countdown.dart';
+export 'src/iron_widgets/iron_delta_badge.dart';
 export 'src/iron_widgets/iron_editor.dart';
 export 'src/iron_widgets/iron_enum.dart';
 export 'src/iron_widgets/iron_label.dart';
@@ -55,6 +61,8 @@ export 'src/iron_widgets/iron_micro_editor.dart';
 export 'src/iron_widgets/iron_micro_switch.dart';
 export 'src/iron_widgets/iron_mini_text.dart';
 export 'src/iron_widgets/iron_multi_selector.dart';
+export 'src/iron_widgets/iron_price_ticker.dart';
 export 'src/iron_widgets/iron_select.dart';
 export 'src/iron_widgets/iron_select_mode.dart';
+export 'src/iron_widgets/iron_sparkline.dart';
 export 'src/iron_widgets/iron_shows.dart';

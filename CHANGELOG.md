@@ -35,6 +35,21 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   other selectors (`mode`, `menuWidth`, `menuMaxHeight`, `searchable`,
   `enabled`). Closes Phase 1 of `SPEC_WIDGETS_ROADMAP`; the example app
   gains a "Selectors – Dropdown Mode" section.
+- **US-2.05** – `IronDeltaBadge`: signed-change pill coloured by market
+  direction (`bullColor` / `bearColor`), neutral at exactly zero, with
+  `precision`, `showSign` and `suffix`.
+- **US-2.06** – `IronPriceTicker`: price display that flashes towards
+  `bullColor` / `bearColor` on change and fades back over
+  `flashDuration`; tabular figures, `RepaintBoundary`, no timers created
+  in build.
+- **US-2.07** – `IronCountdown`: `Ticker`-driven countdown (no `Timer`s)
+  from `until` or `remaining`; pausable, `onFinished` fires exactly once,
+  `dangerColor` below `warningFraction`, custom `format` supported.
+- **US-2.08** – `IronSparkline`: zero-dependency `CustomPainter` trend
+  line with bull/bear colouring (`positiveIsBull` to invert), optional
+  gradient `fill` and uniform downsampling above 200 points. Completes
+  Phase 2 (market indicators); the example app gains a "Market
+  Indicators" section.
 
 ## 2026-04-28
 

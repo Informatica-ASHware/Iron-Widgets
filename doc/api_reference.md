@@ -292,6 +292,84 @@ specifics (US-2.04):
 - The trigger shows a compact summary instead of chips: the single item's
   label, or `'n selected'`, customisable via `summaryBuilder`.
 
+## Market indicators (US-2.05 … US-2.08)
+
+### `IronDeltaBadge`
+
+```dart
+IronDeltaBadge(
+  double value, {
+  int precision = 2,
+  bool showSign = true,
+  String suffix = '%',
+  String? semanticLabel,
+})
+```
+
+Pill coloured by sign: positive → `bullColor`, negative → `bearColor`,
+zero → neutral (white-70 on `neutralSurface`). Corners use the
+`cornerRadius` token; text uses `baseStylePercent`.
+
+### `IronPriceTicker`
+
+```dart
+IronPriceTicker({
+  required double price,
+  double? previous,
+  int precision = 2,
+  Duration flashDuration = const Duration(milliseconds: 600),
+  String prefix = '',
+  String suffix = '',
+  String? semanticLabel,
+})
+```
+
+Flashes towards `bullColor` / `bearColor` when `price` changes across
+rebuilds (or vs `previous` on the very first frame) and fades back to the
+`baseStyleValue` colour over `flashDuration`. Uses tabular figures, an
+`AnimationController` created once (no timers in build) and a
+`RepaintBoundary`.
+
+### `IronCountdown`
+
+```dart
+IronCountdown({
+  DateTime? until,            // exactly one of until / remaining
+  Duration? remaining,
+  VoidCallback? onFinished,   // fires exactly once at zero
+  String Function(Duration)? format,  // default mm:ss / hh:mm:ss
+  bool paused = false,
+  double warningFraction = 0.1,
+  String? semanticLabel,
+})
+```
+
+Driven by a `Ticker` (`TickerProviderStateMixin`), no `Timer`s. `paused`
+freezes and resumes from the frozen value; the text switches to
+`dangerColor` when the remaining fraction drops below `warningFraction`.
+Rebuilds only when the displayed second changes.
+
+### `IronSparkline`
+
+```dart
+IronSparkline(
+  List<double> values, {
+  double width = 120,
+  double height = 32,
+  double strokeWidth = 1.5,
+  bool positiveIsBull = true,
+  Color? color,
+  bool fill = true,
+  String? semanticLabel,
+})
+```
+
+Zero-dependency `CustomPainter` trend line. Colour derives from the
+overall trend (`bullColor` / `bearColor`, white-54 when flat);
+`positiveIsBull: false` inverts the mapping and `color` forces one.
+Series longer than 200 points are uniformly downsampled. Complements
+`AshCandleChart`; it does not replace it.
+
 ### `Show`
 
 ```dart
